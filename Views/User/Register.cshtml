@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Register";
+}
+
+<div class="register-container">
+    <h1 class="register-header">WorkHive</h1>
+    <h2 class="register-subheader">Create a new account</h2>
+
+    <form method="post" action="/User/Register" class="register-form">
+        <label for="name" class="register-label">Name:</label>
+        <input type="text" name="name" id="name" class="register-input" required /><br />
+
+        <label for="email" class="register-label">Email:</label>
+        <input type="email" name="email" id="email" class="register-input" required /><br />
+
+        <label for="password" class="register-label">Password:</label>
+        <input type="password" name="password" id="password" class="register-input" required /><br />
+
+        <label for="role" class="register-label">Role:</label>
+        <select name="role" id="role" class="register-input" required>
+            <option value="client">Client</option>
+            <option value="freelancer">Freelancer</option>
+        </select><br />
+
+        <button type="submit" class="register-button">Register</button>
+    </form>
+
+    <p class="text-danger">@ViewBag.Error</p>
+    <p class="text-success">@ViewBag.Success</p>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: darkseagreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .register-container {
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .register-header {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #111;
+        margin-bottom: 10px;
+    }
+
+    .register-subheader {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .register-form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .register-label {
+        font-size: 1rem;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .register-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    .register-input:focus {
+        outline: none;
+        border-color: #1dbf73;
+    }
+
+    .register-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #1dbf73;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .register-button:hover {
+        background-color: #0f7f59;
+    }
+
+    .text-danger {
+        color: #e74c3c;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .text-success {
+        color: #2ecc71;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+</style>

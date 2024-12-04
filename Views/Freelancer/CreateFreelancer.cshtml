@@ -1,0 +1,231 @@
+﻿@model WorkHive.Models.Freelancer
+@{
+    Layout = null;
+    ViewBag.Title = "Join as Freelancer";
+}
+
+<div class="freelancer-container">
+    <h1 class="freelancer-header">WorkHive</h1>
+    <h2 class="freelancer-subheader">Join as a Freelancer</h2>
+
+    <form method="post" action="/Freelancer/CreateFreelancer" class="freelancer-form">
+        <label for="Name" class="freelancer-label">Name:</label>
+        <input type="text" name="Name" id="Name" class="freelancer-input" required /><br />
+
+        <label for="ProfilePic" class="freelancer-label">Profile Picture Link:</label>
+        <input type="url" name="ProfilePic" id="ProfilePic" class="freelancer-input" placeholder="https://example.com" /><br />
+
+        <label for="language" class="freelancer-label">Language:</label>
+        <select name="Language" id="language" class="freelancer-input" required>
+            <option value="English">English</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Hindi">Hindi</option>
+            <option value="German">German</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+        </select><br />
+
+        <label for="level" class="freelancer-label">Level:</label>
+        <select name="LanguageLevel" id="level" class="freelancer-input" required>
+            <option value="basic">Basic</option>
+            <option value="conversational">Conversational</option>
+            <option value="fluent">Fluent</option>
+            <option value="native/bilingual">Native/Bilingual</option>
+        </select><br />
+
+        <label for="portfolio" class="freelancer-label">Portfolio/Website Link:</label>
+        <input type="url" name="PortfolioLink" id="portfolio" class="freelancer-input" placeholder="https://yourportfolio.com" /><br />
+
+        <label for="phone" class="freelancer-label">Phone Number:</label>
+        <input type="tel" name="Phone" id="phone" class="freelancer-input" placeholder="+123456789" /><br />
+
+        <div id="skills-container">
+            <label class="freelancer-label">Add Skills (2 to 5):</label>
+            <div class="skill-entry">
+                <select name="skills[0].skill_name" class="freelancer-input" required>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                    <option value="Content Writing">Content Writing</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="App Development">App Development</option>
+                </select>
+                <select name="skills[0].experience_level" class="freelancer-input" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <button type="button" class="remove-skill-btn">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-skill-btn" class="freelancer-button">Add Another Skill</button><br />
+
+        <button type="submit" class="freelancer-button">Submit</button>
+    </form>
+
+    <p class="text-danger">@ViewBag.Error</p>
+    <p class="text-success">@ViewBag.Success</p>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: darkseagreen;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .freelancer-container {
+        width: 100%;
+        max-width: 650px;
+        text-align: center;
+        padding-top: 5px;
+    }
+
+    .freelancer-header {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #111;
+        margin-bottom: 10px;
+    }
+
+    .freelancer-subheader {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .freelancer-form {
+      
+        position:center;
+        background-color: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .freelancer-label {
+        font-size: 1rem;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .freelancer-input {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        transition: border-color 0.3s;
+    }
+
+        .freelancer-input:focus {
+            outline: none;
+            border-color: #1dbf73;
+        }
+
+    .freelancer-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1dbf73;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top:10px;
+    }
+
+        .freelancer-button:hover {
+            background-color: #0f7f59;
+        }
+
+    .freelancer-helper-text {
+        font-size: 0.8rem;
+        color: #666;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .text-danger {
+        color: #e74c3c;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .text-success {
+        color: #2ecc71;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .skill-entry {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .remove-skill-btn {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .remove-skill-btn:hover {
+            background-color: #c0392b;
+        }
+
+    #skills-container {
+        margin-bottom: 20px;
+    }
+</style>
+
+<script>
+    let skillIndex = 1;
+
+    document.getElementById('add-skill-btn').addEventListener('click', () => {
+        if (skillIndex >= 5) {
+            alert("You can add a maximum of 5 skills.");
+            return;
+        }
+
+        const skillsContainer = document.getElementById('skills-container');
+        const skillEntry = document.createElement('div');
+        skillEntry.className = 'skill-entry';
+        skillEntry.innerHTML = `
+                <select name="Skills[${skillIndex}].skill_name" class="freelancer-input" required>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                    <option value="Content Writing">Content Writing</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="App Development">App Development</option>
+                </select>
+                <select name="Skills[${skillIndex}].experience_level" class="freelancer-input" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <button type="button" class="remove-skill-btn">Remove</button>
+            `;
+        skillsContainer.appendChild(skillEntry);
+
+        skillEntry.querySelector('.remove-skill-btn').addEventListener('click', () => {
+            skillEntry.remove();
+            skillIndex--;
+        });
+
+        skillIndex++;
+    });
+</script>

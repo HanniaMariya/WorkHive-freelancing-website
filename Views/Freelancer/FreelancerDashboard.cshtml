@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Freelancer Dashboard";
+}
+
+<div class="container mt-5">
+    <!-- Dashboard Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Freelancer Dashboard</h1>
+        <p class="lead">Track your jobs, browse opportunities, and manage your profile effectively.</p>
+    </div>
+
+    <!-- Job Tracker Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Job Tracker</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                    <th>Client</th>
+                    <th>Deadline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mobile App Design</td>
+                    <td>In Progress</td>
+                    <td>Acme Corp</td>
+                    <td>2024-12-20</td>
+                </tr>
+                <tr>
+                    <td>Content Writing</td>
+                    <td>Completed</td>
+                    <td>XYZ Media</td>
+                    <td>2024-12-10</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Browsing Jobs Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Jobs you might like</h2>
+        <div class="row">
+            <div class="col-md-8">
+           
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Logo Design</h5>
+                        <p class="card-text">Description: Create a professional logo for a startup.<br>Posted At: 2024-12-10<br>Proposals: 10<br>Client: Acme Corp</p>
+                        <a href="/Jobs/Details/1" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Social Media Management</h5>
+                        <p class="card-text">
+                            Description: Manage and grow our social media accounts.<br>
+                            Posted At: 2024-12-12<br>
+                            Proposals: 8<br>
+                            Client: DigitalPro
+                        </p>
+                        <a href="/Jobs/Details/3" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Video Editing</h5>
+                        <p class="card-text">
+                            Description: Edit and enhance marketing videos.<br>
+                            Posted At: 2024-12-11<br>
+                            Proposals: 12<br>
+                            Client: MediaHub
+                        </p>
+                        <a href="/Jobs/Details/4" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">SEO Optimization</h5>
+                        <p class="card-text">
+                            Description: Improve website search engine rankings.<br>
+                            Posted At: 2024-12-09<br>
+                            Proposals: 7<br>
+                            Client: TechGrowth
+                        </p>
+                        <a href="/Jobs/Details/5" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Translation Services</h5>
+                        <p class="card-text">
+                            Description: Translate documents into Spanish.<br>
+                            Posted At: 2024-12-07<br>
+                            Proposals: 9<br>
+                            Client: LinguaPro
+                        </p>
+                        <a href="/Jobs/Details/6" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cybersecurity Assessment</h5>
+                        <p class="card-text">
+                            Description: Conduct a security assessment of IT infrastructure.<br>
+                            Posted At: 2024-12-05<br>
+                            Proposals: 6<br>
+                            Client: SafeNet
+                        </p>
+                        <a href="/Jobs/Details/7" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Writing</h5>
+                        <p class="card-text">Description: Write engaging articles for a blog.<br>Posted At: 2024-12-08<br>Proposals: 15<br>Client: XYZ Media</p>
+                        <a href="/Jobs/Details/2" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3 class="h5">Job Filters</h3>
+                <form method="get" action="/Jobs/Search">
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="web">Web Development</option>
+                            <option value="design">Design</option>
+                            <option value="writing">Writing</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Management Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Manage Your Profile</h2>
+        <div class="card p-4">
+            <p>Keep your profile up to date to attract more clients.</p>
+            <a href="/Freelancer/Profile" class="btn btn-success">Manage Profile</a>
+        </div>
+    </section>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .card:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    table {
+        font-size: 0.9rem;
+    }
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>

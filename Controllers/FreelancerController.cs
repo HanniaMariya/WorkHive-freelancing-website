@@ -10,9 +10,21 @@ namespace WorkHive.Controllers
         public IActionResult Index()
         {
             return View();
-        } 
+        }
+        public IActionResult FreelancerDashboard()
+        {
+            return View();
+        }
+         public IActionResult Profile()
+        {
+            Freelancer freelancer = new Freelancer();
+            freelancer = new FreelancerRepository().GetFreelancersBySkill("Graphic Design")[0];
+            return View(freelancer);
+        }
+       
         public IActionResult CreateFreelancer()
         {
+           
             return View();
         }
 

@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Freelancer Profile";
+}
+
+<div class="container mt-5">
+    <!-- Profile Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">@Model.Name</h1>
+        <p class="lead">View your profile details below.</p>
+        @if (!string.IsNullOrEmpty(Model.ProfilePic))
+        {
+            <img src="@Model.ProfilePic" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px;" />
+        }
+    </div>
+
+    <!-- Personal Details -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Personal Details</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Languages:</strong> @Model.Language (@Model.LanguageLevel)</li>
+            <li class="list-group-item"><strong>Phone:</strong> @Model.Phone ?? "Not Provided"</li>
+            <li class="list-group-item"><strong>Portfolio:</strong> 
+                @if (!string.IsNullOrEmpty(Model.PortfolioLink))
+                {
+                    <a href="@Model.PortfolioLink" target="_blank">View Portfolio</a>
+                }
+                else
+                {
+                    <span>Not Provided</span>
+                }
+            </li>
+        </ul>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Skills</h2>
+        <ul class="list-group">
+           
+        
+                @foreach (var skill in Model.skills)
+                {
+                    <li class="list-group-item">@skill.skill_name</li>
+                }
+           
+        </ul>
+    </section>
+</div>
+
+<style>
+    .img-thumbnail {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .list-group-item {
+        font-size: 1rem;
+    }
+   
+</style>

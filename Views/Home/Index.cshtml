@@ -10,6 +10,7 @@
     
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Style.css" />
 
     <style>
         body {
@@ -40,62 +41,75 @@
             margin-left: 15px;
         }
 
-        
-        .hero {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 10px;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 1000px; /* Limit the width of the image */
-            height: auto; /* Ensure the aspect ratio is maintained */
-            max-height: 500px; /* Limit the height to make it shorter */
-            margin-bottom: 20px;
-            object-fit: cover;
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 20px;
+            width: 60%;
+            max-height: 150px;
             border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
+            .carousel-caption h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+      
 
         /* Search Bar Over the Image */
         .search-bar {
-            position: absolute;
-            top: 60%;
-            /* transform: translateY(-10%); */
             display: flex;
             justify-content: center;
-            width: 80%;
-            z-index: 10;
+            align-items: center;
+           /* Center vertically within the viewport */
+            width: 100%; /* Full width */
         }
 
-            .search-bar input{
-                width: 50%; 
-                padding: 10px;
-                border-radius: 3px;
-                border: 2px solid #ccc;
-                font-size: 1rem;
+            .search-bar input {
+                width: auto; /* Wider input for larger appearance */
+                padding: 15px; /* Increased padding for larger input */
+                border-radius: 20px; /* Rounded borders */
+                border: 2px solid #ccc; /* Subtle border */
+                font-size: 1.2rem; /* Larger font size */
+                outline: none; /* Remove default outline */
+                transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition effects */
             }
 
-        .search-bar button {
-            padding: 10px 20px;
-            background-color: #1dbf73;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-size: 1rem;
-            margin-left: 10px;
-        }
+                .search-bar input:focus {
+                    border-color: #1dbf73; /* Highlight border on focus */
+                    box-shadow: 0 0 8px rgba(29, 191, 115, 0.5); /* Glow effect */
+                }
 
-        .search-bar button:hover {
-            background-color: #0f7f59;
-        }
+            .search-bar button {
+                padding: 15px 30px; /* Increased padding for larger button */
+                background-color: #1dbf73; /* Main button color */
+                color: white;
+                border: none;
+                border-radius: 20px; /* Rounded borders */
+                font-size: 1.2rem; /* Larger font size */
+                margin-left: 15px; /* Spacing between input and button */
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.2s; /* Smooth hover effect */
+            }
+
+                .search-bar button:hover {
+                    background-color: #0f7f59; /* Darker shade on hover */
+                    transform: scale(1.05); /* Slight zoom effect on hover */
+                }
+
 
         .description {
+            margin-top:5px;
         background-color: #f8f9fa;
         padding: 40px 20px;
         text-align: center;
@@ -232,6 +246,10 @@
                         <a class="dropdown-item" href="#">Web Development</a>
                         <a class="dropdown-item" href="#">Graphic Design</a>
                         <a class="dropdown-item" href="#">Content Writing</a>
+                        <a class="dropdown-item" href="#">SEO Optimization</a>
+                        <a class="dropdown-item" href="#">Video Editing</a>
+                        <a class="dropdown-item" href="#">Writing & Translation</a>
+                        <a class="dropdown-item" href="#">Cybersecurity</a>
                         <a class="dropdown-item" href="#">Digital Marketing</a>
                     </div>
                 </li>
@@ -239,29 +257,68 @@
 
             <div class="ml-auto nav-buttons">
                
-                <button class="btn btn-success" onclick="location.href='freelancer/createFreelancer';">Join as Freelancer</button>
-                <button class="btn btn-primary" onclick="location.href='home/postJob';">Post a Job</button>
-                <button class="btn btn-outline-success" onclick="location.href='user/login';">Login</button>
-                <button class="btn btn-outline-success" onclick="location.href='user/register';">Sign Up</button>
+                <button class="btn btn-success" onclick="location.href='/freelancer/createFreelancer';">Join as Freelancer</button>
+                <button class="btn btn-primary" onclick="location.href='/home/postJob';">Post a Job</button>
+                <button class="btn btn-outline-success" onclick="location.href='/user/login';">Login</button>
+                <button class="btn btn-outline-success" onclick="location.href='/user/register';">Sign Up</button>
             </div>
         </div>
     </nav>
 
+    <div id="interiorCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
 
-    <!-- Image Section -->
-    <section class="hero">
-        <img src="~/images/a-person-working-from-home-on-a-laptop-in-a-cozy-vibrant-space-filled-with-plants-books-and-colorful-decor-creating-a-warm-and-productive-atmosphere-free-photo.jpg" alt="Freelancer Services" class="hero-image">
-        
-        <!-- Search Bar over the image -->
-        <div class="search-bar">
-            <form method="get" action="/Freelancer/SearchFreelancers">
-                <input type="text" name="searchQuery" placeholder="Search for services..." aria-label="Search Services" />
-                <button type="submit">Search</button>
-            </form>
+       
+
+        <!-- Inner Carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/a-person-working-from-home-on-a-laptop-in-a-cozy-vibrant-space-filled-with-plants-books-and-colorful-decor-creating-a-warm-and-productive-atmosphere-free-photo.jpg"
+                     class="d-block w-100 carousel-image" alt="Freelancer Services">
+                <div class="carousel-caption">
+                    <h1 class="display-5 fw-bold text-light text-shadow">WORK FROM THE COMFORT OF YOUR HOME</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/online-financial-transactions-and-payment-successful-closeup-of-hand-using-a-laptop-for-online-banking-login-to-pay-online-photo.jpg"
+                     class="d-block w-100 carousel-image" alt="Financial Transactions">
+                <div class="carousel-caption">
+                    <h1 class="display-6 fw-bold text-light text-shadow">MAKE SECURE PAYMENT TRANSACTIONS</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/meeting.jpg"
+                     class="d-block w-100 carousel-image" alt="Meeting">
+                <div class="carousel-caption">
+                    <h1 class="display-6 fw-bold text-light text-shadow">HOLD INTERACTIVE MEETINGS </h1>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#interiorCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#interiorCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#interiorCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#interiorCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#interiorCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
-    </section>
+    
 
+    <!-- Search Bar over the image -->
+    <h2 class="mt-5 text-center description-heading">Search for Services to find talent</h2>
+    <div class="search-bar">
+       
+        <form class="m-auto" method="get" action="/Freelancer/SearchFreelancers">
+            <input type="text" name="searchQuery" placeholder="Search a service" aria-label="Search Services" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
 
     <!---description--->
     <section class="description">
@@ -288,25 +345,64 @@
         <div class="container">
             <h2 class="services-heading">Explore Services Available</h2>
             <div class="service-cards">
-                <div class="card">
+              
+                 <div class="card">
                     <i class="fas fa-laptop-code service-icon"></i>
                     <h3>Web Development</h3>
                     <p>Create stunning websites tailored to your needs.</p>
-                </div>
+                 </div>
+                
+
                 <div class="card">
                     <i class="fas fa-paint-brush service-icon"></i>
                     <h3>Graphic Design</h3>
                     <p>Eye-catching designs for your brand.</p>
                 </div>
+               
                 <div class="card">
                     <i class="fas fa-pencil-alt service-icon"></i>
                     <h3>Content Writing</h3>
                     <p>Engaging and SEO-optimized content.</p>
                 </div>
+         
+
+                        
                 <div class="card">
                     <i class="fas fa-bullhorn service-icon"></i>
                     <h3>Digital Marketing</h3>
                     <p>Boost your online presence effectively.</p>
+                </div>
+         
+             
+                    <div class="card">
+                        <i class="fas fa-pen-nib service-icon"></i>
+                        <h3>Writing & Translation</h3>
+                        <p>Deliver compelling content and accurate translations.</p>
+                    </div>
+           
+                <!-- Video Editing -->
+              
+                    <div class="card">
+                        <i class="fas fa-video service-icon"></i>
+                        <h3>Video Editing</h3>
+                        <p>Transform raw footage into captivating stories.</p>
+                    </div>
+            
+                <!-- SEO Optimization -->
+          
+                    <div class="card">
+                        <i class="fas fa-search service-icon"></i>
+                        <h3>SEO Optimization</h3>
+                        <p>Boost your visibility and drive organic traffic.</p>
+                    </div>
+           
+                <!-- Cybersecurity -->
+               
+                    <div class="card">
+                        <i class="fas fa-shield-alt service-icon"></i>
+                        <h3>Cybersecurity</h3>
+                        <p>Secure your data and protect your online presence.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -320,7 +416,7 @@
         </div>
     </footer>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

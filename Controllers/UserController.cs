@@ -67,5 +67,9 @@ namespace WorkHive.Controllers
             HttpContext.Session.Clear();    
             return RedirectToAction("Login");
         }
+        public IActionResult ClientDashboard()
+        {
+            return View();
+        }
     }
 }

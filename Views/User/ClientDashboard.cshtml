@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout1.cshtml"; // Assumes a shared layout is in use
+    ViewBag.Title = "Client Dashboard";
+}
+
+<div class="container mt-5">
+    <!-- Dashboard Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Welcome to Your Dashboard</h1>
+        <p class="lead">Manage your projects, hire top talent, and consult experts seamlessly.</p>
+    </div>
+
+    <!-- Job Tracking Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Track Your Jobs</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                    <th>Assigned Freelancer</th>
+                    <th>Deadline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Website Development</td>
+                    <td>In Progress</td>
+                    <td>John Doe</td>
+                    <td>2024-12-31</td>
+                </tr>
+                <tr>
+                    <td>SEO Optimization</td>
+                    <td>Completed</td>
+                    <td>Jane Smith</td>
+                    <td>2024-12-10</td>
+                </tr>
+                <!-- Additional rows can be dynamically generated -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Action Buttons Section -->
+    <section class="mb-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <div class="card p-3">
+                    <h3 class="h5">Post a Job</h3>
+                    <p class="small">Describe your project and let freelancers bid for it.</p>
+                    <a href="/Home/PostJob" class="btn btn-success">Post Now</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card p-3">
+                    <h3 class="h5">Consult an Expert</h3>
+                    <p class="small">Get guidance from industry professionals.</p>
+                    <a href="/Home/Consult" class="btn btn-primary">Consult</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card p-3">
+                    <h3 class="h5">Hire Freelancers</h3>
+                    <p class="small">Find top-rated freelancers for your needs.</p>
+                    <a href="/Freelancer/Search" class="btn btn-warning">Search Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top-Rated Freelancers Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Top-Rated Freelancers</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/man1.jpg" class="card-img-top" alt="John Doe">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="small text-muted">Web Developer</p>
+                        <a href="/Freelancer/Details/1" class="btn btn-outline-primary btn-sm">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/man3.jpg" class="card-img-top" alt="Ken Smith">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ken Smith</h5>
+                        <p class="small text-muted">SEO Expert</p>
+                        <a href="/Freelancer/Details/2" class="btn btn-outline-primary btn-sm">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/woman.jpg" class="card-img-top" alt="Alice Brown">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Alice Brown</h5>
+                        <p class="small text-muted">Graphic Designer</p>
+                        <a href="/Freelancer/Details/3" class="btn btn-outline-primary btn-sm">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Section: Testimonials -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">What Our Clients Say</h2>
+        <div class="card p-3">
+            <blockquote class="blockquote mb-0">
+                <p class="mb-2">"WorkHive has transformed the way I manage my projects. The freelancers are top-notch!"</p>
+                <footer class="blockquote-footer">Sarah Connor, <cite title="Source Title">Tech Entrepreneur</cite></footer>
+            </blockquote>
+        </div>
+    </section>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .card:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    table {
+        font-size: 0.9rem;
+    }
+</style>

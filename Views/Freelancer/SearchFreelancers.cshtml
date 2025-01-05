@@ -1,6 +1,6 @@
 ﻿@model List<WorkHive.Models.Freelancer>
 @{
-    Layout = "_Layout";
+    Layout = "_navbar";
     ViewBag.Title = "Search Freelancers";
 }
 
@@ -13,24 +13,29 @@
 
     @if (Model.Any())
     {
-        <div class="freelancer-cards">
+        <div>
+        @Html.Partial("_FreelancersList", Model)
+        </div>
+       @*  <div class="freelancer-cards">
             @foreach (var freelancer in Model)
-            {
-                <div class="freelancer-card">
+            { *@
+                 @* <a href="/Freelancer/FreelancerDetails/@freelancer.FreelancerId" style="text-decoration: none;">
+               @*  <div class="freelancer-card">
                     <div class="freelancer-card-header">
                         <h3>@freelancer.Name</h3>
                     </div>
                     <div class="freelancer-card-body">
-                        <p><strong>Profile Picture:</strong> <img src="@freelancer.ProfilePic" alt="@freelancer.Name" class="profile-pic" /></p>
+                        <img src="@freelancer.ProfilePic" alt="@freelancer.Name" class="profile-pic" />
                         <p><strong>Phone:</strong> @freelancer.Phone</p>
                         <p><strong>Portfolio:</strong> <a href="@freelancer.PortfolioLink" target="_blank">@freelancer.PortfolioLink</a></p>
-                    </div>
-                    <div class="freelancer-card-footer">
+                    </div> *@
+                   @*  <div class="freelancer-card-footer">
                         <button class="contact-btn">Contact</button>
-                    </div>
-                </div>
-            }
-        </div>
+                    </div> *@
+               @*  </div>
+                @* </a> *@
+          
+        @* </div> *@ 
     }
     else
     {
@@ -43,7 +48,7 @@
         text-align: center;
         margin: 50px auto;
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
     }
 
     .search-input {

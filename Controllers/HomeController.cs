@@ -21,16 +21,7 @@ namespace WorkHive.Controllers
         {
             return View();
         } 
-        public IActionResult postJob()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult postJob(Job job)
-        {
-            return View("Index","Home");
-        }
-
+       
         public IActionResult Privacy()
         {
             return View();

@@ -19,13 +19,14 @@ namespace WorkHive.Models.Repositories
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "INSERT INTO Users (username, password, email, role) VALUES (@Name, @Password, @Email, @Role)";
+                var query = "INSERT INTO Users (username, password, email, role, joinedAt) VALUES (@Name, @Password, @Email, @Role, @date)";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", user.name);
                     command.Parameters.AddWithValue("@Password", user.password);
                     command.Parameters.AddWithValue("@Email", user.email);
                     command.Parameters.AddWithValue("@Role", user.role);
+                    command.Parameters.AddWithValue("@date", user.joinedAt);
                     command.ExecuteNonQuery();
                 }
             }
@@ -51,7 +52,8 @@ namespace WorkHive.Models.Repositories
                                 name = reader["username"].ToString(),
                                 password = reader["password"].ToString(),
                                 email = reader["email"].ToString(),
-                                role = reader["role"].ToString()
+                                role = reader["role"].ToString(),
+                                joinedAt = (DateTime)reader["joinedAt"]
                             };
                         }
                     }
@@ -78,7 +80,36 @@ namespace WorkHive.Models.Repositories
                                 name = reader["username"].ToString(),
                                 password = reader["password"].ToString(),
                                 email = reader["email"].ToString(),
-                                role = reader["role"].ToString()
+                                role = reader["role"].ToString(),
+                                joinedAt = (DateTime)reader["joinedAt"]
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public User GetUserById(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Users WHERE user_id = @Id";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new User
+                            {
+                                user_id = (int)reader["user_id"],
+                                name = reader["username"].ToString(),
+                                password = reader["password"].ToString(),
+                                email = reader["email"].ToString(),
+                                role = reader["role"].ToString(),
+                                joinedAt = (DateTime)reader["joinedAt"]
                             };
                         }
                     }
@@ -136,7 +167,8 @@ namespace WorkHive.Models.Repositories
                                 name = reader["username"].ToString(),
                                 password = reader["password"].ToString(),
                                 email = reader["email"].ToString(),
-                                role = reader["role"].ToString()
+                                role = reader["role"].ToString(),
+                                joinedAt =(DateTime)reader["joinedAt"]
                             });
                         }
                     }

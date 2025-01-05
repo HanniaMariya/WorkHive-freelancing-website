@@ -15,14 +15,16 @@ namespace WorkHive.Models.Repositories
 
                 // Insert freelancer into Freelancers table
                 string freelancerQuery = @"
-                INSERT INTO Freelancers (name, profile_pic, language, language_level, portfolio_link, phone)
+                INSERT INTO Freelancers (freelancer_id, name, description, profile_pic, language, language_level, portfolio_link, phone)
                 OUTPUT INSERTED.freelancer_id
-                VALUES (@Name, @ProfilePic, @Language, @LanguageLevel, @PortfolioLink, @Phone)";
+                VALUES (@Id, @Name, @Description, @ProfilePic, @Language, @LanguageLevel, @PortfolioLink, @Phone)";
 
                 int freelancerId;
                 using (SqlCommand cmd = new SqlCommand(freelancerQuery, conn))
                 {
+                    cmd.Parameters.AddWithValue("@Id", freelancer.FreelancerId);
                     cmd.Parameters.AddWithValue("@Name", freelancer.Name);
+                    cmd.Parameters.AddWithValue("@Description", freelancer.Description);
                     cmd.Parameters.AddWithValue("@ProfilePic", freelancer.ProfilePic ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@Language", freelancer.Language);
                     cmd.Parameters.AddWithValue("@LanguageLevel", freelancer.LanguageLevel ?? (object)DBNull.Value);
@@ -59,7 +61,7 @@ namespace WorkHive.Models.Repositories
                 conn.Open();
 
                 string query = @"
-                SELECT f.freelancer_id, f.name, f.profile_pic, f.language, f.language_level, f.portfolio_link, f.phone
+                SELECT f.freelancer_id, f.name, f.description, f.profile_pic, f.language, f.language_level, f.portfolio_link, f.phone
                 FROM Freelancers f
                 INNER JOIN Skills s ON f.freelancer_id = s.freelancer_id
                 WHERE s.skill_name = @SkillName";
@@ -76,6 +78,7 @@ namespace WorkHive.Models.Repositories
                             {
                                 FreelancerId = (int)reader["freelancer_id"],
                                 Name = (string)reader["name"],
+                                Description = (string)reader["description"],
                                 ProfilePic = reader["profile_pic"] == DBNull.Value ? null : (string)reader["profile_pic"],
                                 Language = (string)reader["language"],
                                 LanguageLevel = reader["language_level"] == DBNull.Value ? null : (string)reader["language_level"],
@@ -127,19 +130,122 @@ namespace WorkHive.Models.Repositories
 
             return skills;
         }
+        public Freelancer GetFreelancerById(int id)
+        {
+            
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+            SELECT  f.freelancer_id, f.name, f.description, f.profile_pic, 
+                   f.language, f.language_level, f.portfolio_link, f.phone
+            FROM Freelancers f
+            WHERE f.freelancer_id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Freelancer freelancer = new Freelancer()
+                                {
+                                    FreelancerId = (int)reader["freelancer_id"],
+                                    Name = reader["name"]?.ToString() ?? string.Empty,
+                                    Description = reader["description"]?.ToString(),
+                                    ProfilePic = reader["profile_pic"] == DBNull.Value ? null : reader["profile_pic"].ToString(),
+                                    Language = reader["language"]?.ToString() ?? string.Empty,
+                                    LanguageLevel = reader["language_level"] == DBNull.Value ? null : reader["language_level"].ToString(),
+                                    PortfolioLink = reader["portfolio_link"] == DBNull.Value ? null : reader["portfolio_link"].ToString(),
+                                    Phone = reader["phone"] == DBNull.Value ? null : reader["phone"].ToString(),
+                                    skills = GetSkillsByFreelancerId((int)reader["freelancer_id"])
+                                };
+                                return freelancer;
+                            }
+                        }
+                    }
+                }
+            
+            }
+          
+            catch (Exception ex)
+            {
+                // Log the exception for debugging (e.g., using a logging library)
+                Console.WriteLine($"Error retrieving freelancer: {ex.Message}");
+            }
+            Freelancer f = new Freelancer();
+            return f;
+        }
+        public List<Freelancer> GetAllFreelancers()
+        {
+            List<Freelancer>frees= new List<Freelancer>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+            SELECT f.freelancer_id, f.name, f.description, f.profile_pic, 
+                   f.language, f.language_level, f.portfolio_link, f.phone
+            FROM Freelancers f";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                               
+                                Freelancer freelancer = new Freelancer()
+                                {
+                                    FreelancerId = (int)reader["freelancer_id"],
+                                    Name = reader["name"]?.ToString() ?? string.Empty,
+                                    Description = reader["description"]?.ToString(),
+                                    ProfilePic = reader["profile_pic"] == DBNull.Value ? null : reader["profile_pic"].ToString(),
+                                    Language = reader["language"]?.ToString() ?? string.Empty,
+                                    LanguageLevel = reader["language_level"] == DBNull.Value ? null : reader["language_level"].ToString(),
+                                    PortfolioLink = reader["portfolio_link"] == DBNull.Value ? null : reader["portfolio_link"].ToString(),
+                                    Phone = reader["phone"] == DBNull.Value ? null : reader["phone"].ToString(),
+                                    skills = GetSkillsByFreelancerId((int)reader["freelancer_id"])
+                                };
+                                frees.Add(freelancer);
+                                
+                            }
+                        }
+                    }
+                }
+            
+            }
+        
+            catch (Exception ex)
+            {
+                // Log the exception for debugging (e.g., using a logging library)
+                Console.WriteLine($"Error retrieving freelancer: {ex.Message}");
+            }
+            return frees;
+        }
+
         public bool UpdateFreelancer(Freelancer freelancer)
         {
+          //  Console.WriteLine(freelancer.FreelancerId + freelancer.Name + freelancer.Description + freelancer.Language + freelancer.LanguageLevel + freelancer.Phone);
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
 
-                string updateFreelancerQuery = "UPDATE Freelancers SET Name = @Name, Language = @Language, " +
-                                               "LanguageLevel = @LanguageLevel, PortfolioLink = @PortfolioLink, Phone = @Phone " +
+                string updateFreelancerQuery = "UPDATE Freelancers SET Name = @Name, Description=@description, Language = @Language, " +
+                                               "Language_Level = @LanguageLevel, Portfolio_Link = @PortfolioLink, Phone = @Phone " +
                                                "WHERE freelancer_id = @FreelancerId";
 
                 using (SqlCommand cmd = new SqlCommand(updateFreelancerQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", freelancer.Name);
+                    cmd.Parameters.AddWithValue("@description", freelancer.Description);
                     cmd.Parameters.AddWithValue("@Language", freelancer.Language);
                     cmd.Parameters.AddWithValue("@LanguageLevel", freelancer.LanguageLevel ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@PortfolioLink", freelancer.PortfolioLink ?? (object)DBNull.Value);
@@ -147,7 +253,11 @@ namespace WorkHive.Models.Repositories
                     cmd.Parameters.AddWithValue("@FreelancerId", freelancer.FreelancerId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected == 0) return false; // If no rows are updated
+                    if (rowsAffected == 0)
+                    {
+                        Console.WriteLine("ROWS:" + rowsAffected);
+                        return false; // If no rows are updated
+                    }
                 }
 
                 // Delete existing skills and re-insert new skills
@@ -200,6 +310,31 @@ namespace WorkHive.Models.Repositories
             }
 
             return true;
+        }
+        public List<string> GetSkillNamesByFreelancerId(int freelancerId)
+        {
+            List<string> skillNames = new List<string>();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string query = @"
+                   SELECT skill_name
+                   FROM Skills
+                   WHERE freelancer_id = @FreelancerId";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FreelancerId", freelancerId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            skillNames.Add(reader["skill_name"].ToString());
+                        }
+                    }
+                }
+            }
+            return skillNames;
         }
     }
 }

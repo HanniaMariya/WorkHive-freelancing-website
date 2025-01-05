@@ -1,0 +1,130 @@
+﻿@model IEnumerable<WorkHive.Models.Job>
+@{
+    Layout = "_navbar";
+}
+<div class="page-container py-3">
+    <!-- Search and Filter Section -->
+     <section class="search-filter-section mb-5">
+    <div class="card p-3">
+
+     <h3 class="section-title text-success mb-3 text-center">Filter Jobs by Budget / Services</h3>
+    <form method="get" action="/Job/SearchJobs" class="row g-2 justify-content-center">
+     @*    <div class="col-md-3">
+            <input type="number" name="budget" class="form-control form-control-lg" placeholder="Filter by budget" />
+        </div> *@
+        <div class="col-md-3">
+            <select name="skills" class="form-select form-select-lg" multiple>
+                <option value="Web Development">Web Development</option>
+                <option value="Graphic Design">Graphic Design</option>
+                <option value="Content Writing">Content Writing</option>
+                <option value="SEO">SEO</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="App Development">App Development</option>
+                <option value="Cyber Security">Cyber Security</option>
+                <option value="Writing & Translation">Writing & Translation</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="AI Services">AI Services</option>
+                <option value="Data Analysis">Data Analysis</option>
+            </select>
+
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-70 py-3">Apply Filter</button>
+        </div>
+    </form>
+
+    </div>
+    </section>
+
+    <!-- Jobs List Section -->
+    <section class="jobs-list-section">
+        <h3 class="section-title text-success fw-bold text-center">Available Jobs</h3>
+        @await Html.PartialAsync("_JobsList", Model)
+    </section>
+
+</div>
+
+<style>
+    /* General Styling */
+
+    .page-container {
+        background-color: #f8f9fa;
+        max-width: 1200px;
+        margin: auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .page-title {
+        color: #006644;
+        font-size: 3rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .section-title {
+        color: #006644;
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .text-muted {
+        font-size: 1rem;
+    }
+
+    .card {
+        background-color: #f9f9f9;
+        border: none;
+       
+    }
+
+    .form-control,
+    .form-select,
+    .btn {
+        border-radius: 5px;
+    }
+
+    .btn-success {
+        background-color: #2d6a4f;
+        border: none;
+        transition: background-color 0.3s ease;
+        font-weight: 600;
+    }
+
+    .btn-success:hover {
+        background-color: #1b4332;
+    }
+
+    /* Jobs Section */
+    .jobs-list-section {
+        background-color: #f8f9fa;
+        padding: 10px;
+       /*  border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+    }
+
+    .jobs-list-section h3 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .form-control-lg,
+    .form-select-lg {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+
+    /* Spacing and Alignment */
+    .g-3 {
+        gap: 1.5rem;
+    }
+
+   /*  .py-5 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+ */
+    /* Responsiveness */
+
+</style>

@@ -1,0 +1,39 @@
+﻿@model List<WorkHive.Models.ViewModels.ApplicationDetails>
+@{
+    Layout = "_Layout2";
+}
+<div class="container mt-5">
+    <!-- Dashboard Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Your Applications</h1>
+        @* <p class="lead">Track your applications</p> *@
+    </div>
+
+    <!-- Job Tracker Section -->
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Application Tracker</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Application Id</th>
+                    <th>Job Title</th>
+                    <th>Proposal</th>
+                    <th>Applied At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var app in Model)
+                {
+                    <tr>
+                        <td>@app.application.app_id</td>
+
+                        <td>@app.Job.title</td>
+                        <td>@app.application.proposal</td>
+
+                        <td>@app.application.appliedAt.ToString("MMMM dd, yyyy - h:mm tt")</td>
+                    </tr>
+                }
+              
+            </tbody>
+        </table>
+    </section>

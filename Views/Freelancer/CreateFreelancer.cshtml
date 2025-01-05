@@ -6,14 +6,17 @@
 
 <div class="freelancer-container">
     <h1 class="freelancer-header">WorkHive</h1>
-    <h2 class="freelancer-subheader">Join as a Freelancer</h2>
+    <h2 class="freelancer-subheader">Join as a Freelancer and find work according to your interest and skills!</h2>
 
-    <form method="post" action="/Freelancer/CreateFreelancer" class="freelancer-form">
+    <form method="post" enctype="multipart/form-data" action="/Freelancer/CreateFreelancer" class="freelancer-form">
         <label for="Name" class="freelancer-label">Name:</label>
         <input type="text" name="Name" id="Name" class="freelancer-input" required /><br />
 
-        <label for="ProfilePic" class="freelancer-label">Profile Picture Link:</label>
-        <input type="url" name="ProfilePic" id="ProfilePic" class="freelancer-input" placeholder="https://example.com" /><br />
+        <label for="Description" class="freelancer-label">Give a brief description of your skills to attract clients:</label>
+        <textarea name="Description" id="Description" class="freelancer-input" rows="3" required></textarea>
+
+        <label for="ProfilePic" class="freelancer-label">Profile Picture:</label>
+        <input type="file" name="ProfilePic" id="ProfilePic" class="freelancer-input" accept="image/*" required /><br />
 
         <label for="language" class="freelancer-label">Language:</label>
         <select name="Language" id="language" class="freelancer-input" required>
@@ -40,7 +43,7 @@
         <input type="tel" name="Phone" id="phone" class="freelancer-input" placeholder="+123456789" /><br />
 
         <div id="skills-container">
-            <label class="freelancer-label">Add Skills (2 to 5):</label>
+            <label class="freelancer-label">Add your best skills (1 to 5):</label>
             <div class="skill-entry">
                 <select name="skills[0].skill_name" class="freelancer-input" required>
                     <option value="Web Development">Web Development</option>
@@ -49,6 +52,11 @@
                     <option value="SEO">SEO</option>
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="App Development">App Development</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Writing & Translation">Writing & Translation</option>
+                    <option value="Video Editing">Video Editing</option>
+                    <option value="AI Engineering">AI Engineering</option>
+                    <option value="Data Analysis">Data Analysis</option>
                 </select>
                 <select name="skills[0].experience_level" class="freelancer-input" required>
                     <option value="Beginner">Beginner</option>
@@ -70,7 +78,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: darkseagreen;
+        background-color: #004d33;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -88,29 +96,29 @@
     .freelancer-header {
         font-size: 3rem;
         font-weight: bold;
-        color: #111;
+        color: white;
         margin-bottom: 10px;
     }
 
     .freelancer-subheader {
         font-size: 1.5rem;
-        color: #333;
+        color: #b3e6cc;
         margin-bottom: 30px;
     }
 
     .freelancer-form {
       
         position:center;
-        background-color: white;
+        background-color: #006644;
         padding: 40px;
         border-radius: 8px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         text-align: left;
     }
 
     .freelancer-label {
         font-size: 1rem;
-        color: #333;
+        color: white;
         display: block;
         margin-bottom: 8px;
     }
@@ -137,6 +145,7 @@
         border: none;
         border-radius: 6px;
         color: white;
+        font-weight:bold;
         font-size: 1rem;
         cursor: pointer;
         transition: background-color 0.3s;
@@ -211,7 +220,12 @@
                     <option value="SEO">SEO</option>
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="App Development">App Development</option>
-                </select>
+                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Writing & Translation">Writing & Translation</option>
+                    <option value="Video Editing">Video Editing</option>
+                    <option value="AI Engineering">AI Engineering</option>
+                    <option value="Data Analysis">Data Analysis</option>
+                    </select>
                 <select name="Skills[${skillIndex}].experience_level" class="freelancer-input" required>
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>

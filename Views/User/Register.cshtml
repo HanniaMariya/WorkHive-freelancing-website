@@ -6,6 +6,7 @@
 <div class="register-container">
     <h1 class="register-header">WorkHive</h1>
     <h2 class="register-subheader">Create a new account</h2>
+    <div class="already">Already have an account? <a href="@Url.Action("Login")"> Login</a></div>
 
     <form method="post" action="/User/Register" class="register-form">
         <label for="name" class="register-label">Name:</label>
@@ -33,44 +34,53 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: darkseagreen;
+        background-color: #004d33;
         display: flex;
         justify-content: center;
-        align-items: center;
+       /*  align-items: center; */
         height: 100vh;
         margin: 0;
     }
 
     .register-container {
+        margin:auto 50px;
         text-align: center;
         width: 100%;
-        max-width: 400px;
+        max-width: 500px;
     }
 
     .register-header {
         font-size: 3rem;
         font-weight: bold;
-        color: #111;
+        color: white;
         margin-bottom: 10px;
     }
 
     .register-subheader {
         font-size: 1.5rem;
-        color: #333;
+        color: #b3e6cc;
+        margin-bottom: 10px;
+    }
+    .already
+    {
+        color:white;
         margin-bottom: 30px;
     }
-
+    a{
+        color: #b3e6cc;
+       
+    }
     .register-form {
-        background-color: white;
+        background-color: #006644;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: left;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .register-label {
         font-size: 1rem;
-        color: #333;
+        color: white;
         display: block;
         margin-bottom: 8px;
     }
@@ -81,12 +91,12 @@
         font-size: 1rem;
         margin-bottom: 20px;
         border-radius: 4px;
-        border: 1px solid #ddd;
+        border: 2px solid white;
     }
 
     .register-input:focus {
         outline: none;
-        border-color: #1dbf73;
+        border-color: #004d33;
     }
 
     .register-button {
@@ -95,6 +105,7 @@
         background-color: #1dbf73;
         border: none;
         border-radius: 4px;
+        font-weight:bold;
         color: white;
         font-size: 1rem;
         cursor: pointer;

@@ -9,5 +9,7 @@
         public decimal? budget { get; set; }
         public string status { get; set; } = "Open";
         public DateTime PostedAt { get; set; } = DateTime.Now; 
+
+        public List<SkillRequired> skillsRequired {  get; set; }=new List<SkillRequired>();
     }
 }

@@ -1,59 +1,124 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
-    ViewBag.Title = "Freelancer Profile";
+﻿@model WorkHive.Models.Freelancer
+
+@{
+    Layout = "_Layout2";
 }
 
-<div class="container mt-5">
-    <!-- Profile Header -->
+<div class="freelancer-profile mt-5 mx-auto p-4" style="max-width: 800px; background-color: #ffffff; border-radius: 12px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <!-- Profile Picture -->
     <div class="text-center mb-4">
-        <h1 class="display-4">@Model.Name</h1>
-        <p class="lead">View your profile details below.</p>
-        @if (!string.IsNullOrEmpty(Model.ProfilePic))
-        {
-            <img src="@Model.ProfilePic" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px;" />
-        }
+        <img src="@Model.ProfilePic" alt="Profile Picture" class="profile-pic rounded-circle" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #388e3c;" />
     </div>
 
-    <!-- Personal Details -->
-    <section class="mb-5">
-        <h2 class="h4 mb-3">Personal Details</h2>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>Languages:</strong> @Model.Language (@Model.LanguageLevel)</li>
-            <li class="list-group-item"><strong>Phone:</strong> @Model.Phone ?? "Not Provided"</li>
-            <li class="list-group-item"><strong>Portfolio:</strong> 
-                @if (!string.IsNullOrEmpty(Model.PortfolioLink))
-                {
-                    <a href="@Model.PortfolioLink" target="_blank">View Portfolio</a>
-                }
-                else
-                {
-                    <span>Not Provided</span>
-                }
-            </li>
-        </ul>
-    </section>
+    <!-- Freelancer Name -->
+    <div class="text-center mb-4">
+        <h2 class="text-dark-green fw-bold">@Model.Name</h2>
+        <p class="text-muted">@Model.Description</p>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Languages -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Languages</h5>
+        <p class="text-dark">@Model.Language (@Model.LanguageLevel)</p>
+    </div>
+
+    <hr class="section-divider" />
 
     <!-- Skills -->
-    <section class="mb-5">
-        <h2 class="h4 mb-3">Skills</h2>
-        <ul class="list-group">
-           
-        
-                @foreach (var skill in Model.skills)
-                {
-                    <li class="list-group-item">@skill.skill_name</li>
-                }
-           
-        </ul>
-    </section>
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Skills</h5>
+        <div class="d-flex flex-wrap gap-2">
+            @foreach (var skill in Model.skills)
+            {
+                <span class="badge skill-badge">@skill.skill_name</span>
+            }
+        </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Portfolio and Contact -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Portfolio</h5>
+        <p class="text-dark">
+            @if (!string.IsNullOrEmpty(Model.PortfolioLink))
+            {
+                <a href="@Model.PortfolioLink" target="_blank" class="text-success" style="text-decoration: none;">View Portfolio</a>
+            }
+            else
+            {
+                <span class="text-muted">No portfolio link provided.</span>
+            }
+        </p>
+    </div>
+
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Contact</h5>
+        <p class="text-dark">@Model.Phone</p>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-apply w-50" onclick="location.href='/freelancer/UpdateProfile';">Update Profile</button>
+    </div>
 </div>
 
 <style>
-    .img-thumbnail {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* General Styling */
+    body {
+        background-color: #f7f8fa;
+        font-family: 'Arial', sans-serif;
     }
-    .list-group-item {
+
+    .freelancer-profile {
+        padding: 20px;
+    }
+
+    .section-divider {
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Typography */
+    .text-dark-green {
+        color: #1e5631;
+    }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+
+    /* Skills Badges */
+    .skill-badge {
+        background-color: #F5F5F5;
+        color: #3b6c3b;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    /* Profile Picture */
+    .profile-pic {
+        border: 3px solid #388e3c;
+    }
+
+    /* Apply Button */
+    .btn-apply {
+        background-color: green;
+        color: white;
+        padding: 0.7rem 1.5rem;
         font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        transition: all 0.3s ease-in-out;
     }
-   
+
+    .btn-apply:hover {
+        background-color: #1dbf73;
+        transform: scale(1.05);
+    }
 </style>

@@ -8,5 +8,6 @@
         public string email { get; set; }
         
         public string role { get; set; }
+        public DateTime joinedAt { get; set; } = DateTime.Now;
     }
 }

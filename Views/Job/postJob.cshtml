@@ -3,44 +3,75 @@
     Layout = null;
     ViewBag.Title = "Post a Job";
 }
-<h1 class="job-header">WorkHive</h1>
-<h2 class="job-subheader">Let us know about the job you're posting</h2>
-<div class="job-container">
-   
 
-    <form method="post" action="/Home/PostJob" class="job-form">
-        
+<h1 class="job-header">WorkHive</h1>
+<h2 class="job-subheader">Let us know about the job you're posting!</h2>
+<div class="job-container">
+
+    <form method="post" action="/Job/PostJob" class="job-form">
+
         <label for="Title" class="job-label">Job Title:</label>
-        <input type="text" name="title" id="Title" class="job-input" required />
-        
+        <input type="text" name="title" id="Title" class="job-input" placeholder="E-commerce Website" required />
+
         <label for="Description" class="job-label">Job Description:</label>
-        <textarea name="Description" id="description" class="job-input" rows="4" required></textarea>
-        
+        <textarea name="description" id="Description" class="job-input" rows="4" placeholder="The website should be responsive and contain these features and pages..." required></textarea>
+
         <label for="Budget" class="job-label">Budget:</label>
-        <input type="number" name="budget" id="Budget" class="job-input" step="0.01" required />
-        
+        <input type="number" name="budget" id="Budget" class="job-input" step="0.1" required />
+
         <label for="Skills" class="job-label">Skills Required:</label>
-        <select name="Skills" id="Skills" class="job-input" multiple required>
+        <select id="Skills" class="job-input" multiple required>
             <option value="Web Development">Web Development</option>
             <option value="Graphic Design">Graphic Design</option>
             <option value="Content Writing">Content Writing</option>
             <option value="SEO">SEO</option>
             <option value="Digital Marketing">Digital Marketing</option>
             <option value="App Development">App Development</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Writing & Translation">Writing & Translation</option>
+            <option value="Video Editing">Video Editing</option>
+            <option value="AI Services">AI Services</option>
+            <option value="Data Analysis">Data Analysis</option>
+
         </select>
         <small class="helper-text">Hold 'Ctrl' (or 'Cmd' on Mac) to select multiple skills</small>
-        
+
+        <!-- Hidden input to hold the selected skills as a comma-separated list -->
+        <input type="hidden" name="skills" id="selectedSkills" />
+
         <button type="submit" class="job-button">Post Job</button>
     </form>
 
     <p class="text-danger">@ViewBag.Error</p>
     <p class="text-success">@ViewBag.Success</p>
+    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
 </div>
+
+<script>
+// JavaScript to capture selected skills and update hidden input field
+document.querySelector('form').addEventListener('submit', function (event) {
+    // Get selected skills
+    var selectedSkills = Array.from(document.getElementById('Skills').selectedOptions)
+        .map(option => option.value);
+
+    // Ensure the list contains between 1 and 10 skills
+    if (selectedSkills.length < 1 || selectedSkills.length > 10) {
+        event.preventDefault(); // Prevent form submission
+        alert('Please select between 1 and 10 skills.');
+        return;
+    }
+
+    // Update the hidden input field with the selected skills
+    document.getElementById('selectedSkills').value = selectedSkills.join(',');
+
+});
+</script>
+
 
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: darkseagreen;
+        background-color: #004d33;
         margin: 0;
         padding: 0;
     }
@@ -50,37 +81,38 @@
         max-width: 600px;
         margin: 0 auto;
         padding: 30px;
-        background-color:white;
+        background-color: #006644;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .job-header {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #111;
+        color: white;
         text-align: center;
         margin: 20px;
     }
 
     .job-subheader {
         font-size: 1.5rem;
-        color: #333;
+        color: #b3e6cc;
         text-align: center;
         margin-bottom: 30px;
     }
 
     .job-form {
-       
+
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 8px;
     }
 
     .job-label {
-        
+
         font-size: 1rem;
-        color: black;
+
+        color: white;
         margin-bottom: 8px;
     }
 
@@ -90,7 +122,7 @@
         font-size: 1rem;
         border-radius: 4px;
         border: 1px solid #ddd;
-        margin-bottom: 20px;
+        margin-bottom: 8px;
         box-sizing: border-box;
     }
 
@@ -101,7 +133,7 @@
 
     .helper-text {
         font-size: 0.9rem;
-        color: #777;
+        color: white;
         margin-bottom: 20px;
     }
 
@@ -132,6 +164,6 @@
         margin-top: 10px;
     }
 
-  
-    
+
+
 </style>

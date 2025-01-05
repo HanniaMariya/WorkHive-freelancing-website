@@ -1,0 +1,134 @@
+﻿@model WorkHive.Models.ViewModels.JobDetails;
+@{
+    Layout = "_navbar";
+}
+
+
+<div class="job-details-page mt-5 mx-auto p-5" style="max-width: 900px;  background-color: #ffffff;  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);*/ border-radius: 12px; ">
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h1 class="text-dark-green fw-bold mb-2">@Model.job.title</h1>
+        <p class="text-muted">Posted on: @Model.job.PostedAt.ToString("MMMM dd, yyyy - h:mm tt")</p>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Job Description -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Job Description</h5>
+        <p class="text-dark">@Model.job.description</p>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Budget -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Budget</h5>
+        <p class="text-dark">$@Model.job.budget</p>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Status -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Status</h5>
+        <span class="status-tag px-3 py-1">@Model.job.status</span>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Skills Required -->
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">Skills Required</h5>
+        <div class="d-flex flex-wrap gap-2">
+            @foreach (var skill in Model.job.skillsRequired)
+            {
+                <span class="badge skill-badge">@skill.skill_name</span>
+            }
+        </div>
+    </div>
+    <hr class="section-divider" />
+
+    <div class="mb-4">
+        <h5 class="text-dark-green fw-bold">About the Client</h5>
+        <div class="text-dark ">Name: <span class="text-muted">@Model.user.name</span></div>
+        <div class="text-dark ">Member since: <span class="text-muted">@Model.user.joinedAt.ToString("MMMM dd, yyyy")</span></div>
+     
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Apply Button -->
+    <div class="text-center mt-4">
+        <form method="get" action="/Application/SubmitApplication">
+            <input type="hidden" name="jobId" value="@Model.job.job_id" />
+            <button type="submit" class="btn btn-apply">Apply Now</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* General Styling */
+    body {
+        
+        background-color: #f7f8fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .job-details-page {
+        /* border-radius: 15px; */
+        padding: 20px;
+    }
+
+    .section-divider {
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Typography */
+    .text-dark-green {
+        color: #1e5631;
+    }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+
+    /* Status Tag */
+    .status-tag {
+        background-color: ghostwhite;
+        color: #1e5631;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    /* Skills Badges */
+    .skill-badge {
+        background-color: #F5F5F5;
+        color: #3b6c3b;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        font-weight: 500;
+        margin-right:5px;
+    }
+
+    /* Apply Button */
+    .btn-apply {
+        background-color: green;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-apply:hover {
+            background-color: #1dbf73;
+        transform: scale(1.05);
+    }
+</style>

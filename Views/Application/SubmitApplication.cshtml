@@ -1,0 +1,46 @@
+﻿@model int
+
+@{
+    Layout = "_LayoutSimple";
+    ViewData["Title"] = "Submit Proposal";
+    int jobId = Model; // The job ID passed to this view
+}
+
+<div class="container mt-5">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center fw-bold">Apply for the job</h1>
+           
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <!-- Card Heading -->
+                <div class="card-header bg-success text-white">
+                    <h3 class="text-center">Write Your Proposal</h3>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="SubmitApplication" method="post">
+                        <input type="hidden" name="job_id" value="@jobId" />
+                        @* <input type="hidden" name="freelancer_id" value="@HttpContext.Session.GetInt32("UserId")" /> *@
+
+                        <!-- Proposal Textarea -->
+                        <div class="form-group">
+                            <label for="proposal" class="form-label">Add a brief proposal letter:</label>
+                            <textarea class="form-control" id="proposal" name="proposal" rows="6" placeholder="Highlight why you should be chosen for the job..." required></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success px-5">Submit Proposal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

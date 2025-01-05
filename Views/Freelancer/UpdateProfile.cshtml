@@ -1,0 +1,113 @@
+﻿@model WorkHive.Models.Freelancer
+
+@{
+    Layout = "_Layout2";
+}
+
+<div class="freelancer-edit-profile mt-5 mx-auto p-4" style="max-width: 800px; background-color: #ffffff; border-radius: 12px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <!-- Profile Picture -->
+   
+    <div class="text-center mb-4">
+        <img src="@Model.ProfilePic" alt="Profile Picture" class="profile-pic rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #388e3c;" />
+       @*  <div>
+            <label for="profilePic" class="form-label text-dark-green fw-bold">Update Profile Picture</label>
+            <input type="file" id="profilePic" name="ProfilePic" class="form-control" />
+        </div> *@
+    </div>
+
+    <form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+
+        <div class="d-none">
+            <input type="hidden" id="freelancerId" name="FreelancerId" value="@Model.FreelancerId" />
+        </div>
+        <!-- Name -->
+        <div class="mb-4">
+            <label for="name" class="form-label text-dark-green fw-bold">Name</label>
+            <input type="text" id="name" name="Name" value="@Model.Name" class="form-control" />
+        </div>
+
+        <!-- Description -->
+        <div class="mb-4">
+            <label for="description" class="form-label text-dark-green fw-bold">Description</label>
+            <textarea id="description" name="Description" class="form-control" rows="4" placeholder="Write about yourself...">@Model.Description</textarea>
+        </div>
+
+        <!-- Languages -->
+        <div class="mb-4">
+            <label for="language" class="form-label text-dark-green fw-bold">Languages</label>
+            <input type="text" id="language" name="Language" value="@Model.Language" class="form-control" />
+        </div>
+
+        <div class="mb-4">
+            <label for="languageLevel" class="form-label text-dark-green fw-bold">Language Proficiency</label>
+            <input type="text" id="languageLevel" name="LanguageLevel" value="@Model.LanguageLevel" class="form-control" />
+        </div>
+
+      @*   <!-- Skills -->
+        <div class="mb-4">
+            <label for="skills" class="form-label text-dark-green fw-bold">Skills</label>
+            <textarea id="skills" name="Skills" class="form-control" rows="3" placeholder="Enter skills separated by commas">@string.Join(", ", Model.skills.Select(s => s.skill_name))</textarea>
+        </div> *@
+
+        <!-- Portfolio -->
+        <div class="mb-4">
+            <label for="portfolioLink" class="form-label text-dark-green fw-bold">Portfolio Link</label>
+            <input type="url" id="portfolioLink" name="PortfolioLink" value="@Model.PortfolioLink" class="form-control" placeholder="https://yourportfolio.com" />
+        </div>
+
+        <!-- Contact -->
+        <div class="mb-4">
+            <label for="phone" class="form-label text-dark-green fw-bold">Phone</label>
+            <input type="text" id="phone" name="Phone" value="@Model.Phone" class="form-control" />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-apply w-50">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* General Styling */
+    body {
+        background-color: #f7f8fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .freelancer-edit-profile {
+        padding: 20px;
+    }
+
+    .form-label {
+        margin-bottom: 5px;
+    }
+
+    .profile-pic {
+        border: 3px solid #388e3c;
+    }
+
+    .text-dark-green {
+        color: #1e5631;
+    }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+
+    /* Button */
+    .btn-apply {
+        background-color: green;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-apply:hover {
+        background-color: #1dbf73;
+        transform: scale(1.05);
+    }
+</style>

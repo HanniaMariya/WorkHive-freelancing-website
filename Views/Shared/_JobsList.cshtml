@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WorkHive.Models.Job>
+@{
+    Layout = null;
+}
+
+<div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+    <div>
+        @foreach (var job in Model)
+        {
+            <a href="/Job/JobDetails/@job.job_id" style="text-decoration: none;">
+                <div class="myCard" style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 10px; margin-bottom: 20px; padding: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;">
+                    <p style="color: #388e3c; font-size: 14px; margin-bottom: 10px;">
+                        Posted on: @job.PostedAt.ToString("MMMM dd, yyyy - h:mm tt")
+                    </p>
+                    <h3 style="color: #1b5e20; margin: 0;">@job.title</h3>
+                    <p style="margin: 10px 0; color: #424242;">
+                        @if (job.description.Length > 100)
+                        {
+                            @($"{job.description.Substring(0, 100)}...")
+                            <span style="color: #388e3c; cursor: pointer; display:inline"> Read More </span>
+                        }
+                        else
+                        {
+                            @job.description
+                        }
+                    </p>
+                    <div style=" margin-bottom: 10px;">
+                        <p style="font-size: 14px; color: #757575; margin: 0;">Status: <span style="color: #2e7d32;">@job.status</span></p>
+                        <p style="font-size: 14px; color: #757575; margin: 0;">Budget: <span style="color: #2e7d32;">$@job.budget</span></p>
+                    </div>
+                    <div>
+                        <p style="font-size: 14px; color: #388e3c; margin-bottom: 5px;">Skills Required:</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                            @foreach (var skill in job.skillsRequired)
+                            {
+                                <span style="background-color: #a5d6a7; color: #1b5e20; padding: 5px 10px; border-radius: 20px; font-size: 12px;">@skill.skill_name</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+<style>
+    /* Hover effect for the job card */
+    .myCard:hover {
+        transform: scale(1.05); /* Slightly enlarge the card */
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Make the shadow more pronounced */
+    }
+
+    /* Click effect for the job card */
+    myCard:active {
+        transform: scale(0.98); /* Slightly shrink the card on click */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset the shadow to default */
+    }
+</style>

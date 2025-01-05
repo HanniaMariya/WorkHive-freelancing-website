@@ -5,6 +5,7 @@
 <div class="login-container">
     <h1 class="login-header">WorkHive</h1>
     <h2 class="login-subheader">Login to existing account</h2>
+    <div class="dont">Don't have an account? <a href="@Url.Action("Register")"> Sign Up</a></div>
 
     <form method="post" action="/User/Login" class="login-form">
         <label for="email" class="login-label">Email:</label>
@@ -22,45 +23,55 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: darkseagreen;
+        background-color: #004d33;
         display: flex;
         justify-content: center;
-        align-items: center;
+       /*  align-items: center; */
         height: 100vh;
         margin: 0;
     }
    
     .login-container {
+        margin-top:40px;
         text-align: center;
         width: 100%;
-        max-width: 400px;
+        max-width: 450px;
     }
 
     .login-header {
         font-size: 3rem;
         font-weight: bold;
-        color: #111;
+        color: white;
         margin-bottom: 10px;
     }
 
     .login-subheader {
         font-size: 1.5rem;
-        color: #333;
-        margin-bottom: 30px;
+        color: #b3e6cc;
+        margin-bottom: 10px;
 
     }
 
+    .dont {
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    a {
+        color: #b3e6cc;
+    }
     .login-form {
-        background-color: white;
+        background-color: #006644;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: left;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .login-label {
         font-size: 1rem;
-        color: #333;
+        color: white;
+      
         display: block;
         margin-bottom: 8px;
     }
@@ -71,12 +82,12 @@
         font-size: 1rem;
         margin-bottom: 20px;
         border-radius: 4px;
-        border: 1px solid #ddd;
+        border: 2px solid white;
     }
 
         .login-input:focus {
             outline: none;
-            border-color: #1dbf73;
+            border-color: #004d33;
         }
 
     .login-button {
@@ -87,6 +98,7 @@
         border-radius: 4px;
         color: white;
         font-size: 1rem;
+        font-weight:bold;
         cursor: pointer;
         transition: background-color 0.3s;
     }

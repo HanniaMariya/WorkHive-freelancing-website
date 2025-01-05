@@ -25,8 +25,16 @@ namespace WorkHive.Controllers
                 }
 
                 _userRepository.AddUser(user);
-                ViewBag.Success = "Registration successful. Please login.";
-                return RedirectToAction("Login");
+                ViewBag.Success = "Registration successful";
+                var insertedUser = _userRepository.GetUser(user.email, user.password);
+                HttpContext.Session.SetInt32("UserId", insertedUser.user_id);
+                HttpContext.Session.SetString("UserName", insertedUser.name);
+                HttpContext.Session.SetString("UserRole", insertedUser.role);
+
+                if (user.role.Normalize().Equals("freelancer", StringComparison.OrdinalIgnoreCase))
+                    return RedirectToAction("CreateFreelancer", "Freelancer");
+
+                return RedirectToAction("ClientDashboard","User");
             }
 
             return View(user);
@@ -56,9 +64,11 @@ namespace WorkHive.Controllers
             HttpContext.Session.SetInt32("UserId", user.user_id);
             HttpContext.Session.SetString("UserName", user.name);
             HttpContext.Session.SetString("UserRole", user.role);
-          
+            if (HttpContext.Session.GetString("UserRole") == "freelancer")
+                return RedirectToAction("FreelancerDashboard", "Freelancer");
+            return RedirectToAction("ClientDashboard", "User");
 
-            return RedirectToAction("Index", "Home");
+            
         }
 
       
@@ -69,7 +79,11 @@ namespace WorkHive.Controllers
         }
         public IActionResult ClientDashboard()
         {
-            return View();
+            JobRepository jobRepository = new JobRepository();
+            List<Job> jobs = new List<Job>();
+            int userID = (int)HttpContext.Session.GetInt32("UserId");
+            jobs = jobRepository.GetJobsByClientId(userID);
+            return View(jobs);
         }
     }
 }

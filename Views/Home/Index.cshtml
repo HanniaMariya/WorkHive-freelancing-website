@@ -11,6 +11,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="~/css/Style.css" />
+  
 
     <style>
         body {
@@ -227,30 +228,32 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find Work</a>
+                    <a class="nav-link" href="@Url.Action("ViewJobs", "Job")">Find Work</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Hire Freelancers</a>
+                    <a class="nav-link" href="@Url.Action("ViewFreelancers", "Freelancer")">Find Freelancers</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Services
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Web Development</a>
-                        <a class="dropdown-item" href="#">Graphic Design</a>
-                        <a class="dropdown-item" href="#">Content Writing</a>
-                        <a class="dropdown-item" href="#">SEO Optimization</a>
-                        <a class="dropdown-item" href="#">Video Editing</a>
-                        <a class="dropdown-item" href="#">Writing & Translation</a>
-                        <a class="dropdown-item" href="#">Cybersecurity</a>
-                        <a class="dropdown-item" href="#">Digital Marketing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Web Development</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Graphic Design</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Content Writing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">SEO Optimization</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Video Editing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Writing & Translation</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Cybersecurity</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Digital Marketing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">AI Services</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Data Analysis</a>
                     </div>
                 </li>
             </ul>
@@ -258,7 +261,7 @@
             <div class="ml-auto nav-buttons">
                
                 <button class="btn btn-success" onclick="location.href='/freelancer/createFreelancer';">Join as Freelancer</button>
-                <button class="btn btn-primary" onclick="location.href='/home/postJob';">Post a Job</button>
+                <button class="btn btn-primary" onclick="location.href='/job/postJob';">Post a Job</button>
                 <button class="btn btn-outline-success" onclick="location.href='/user/login';">Login</button>
                 <button class="btn btn-outline-success" onclick="location.href='/user/register';">Sign Up</button>
             </div>
@@ -266,8 +269,6 @@
     </nav>
 
     <div id="interiorCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-
-       
 
         <!-- Inner Carousel -->
         <div class="carousel-inner">
@@ -289,7 +290,7 @@
                 <img src="~/images/meeting.jpg"
                      class="d-block w-100 carousel-image" alt="Meeting">
                 <div class="carousel-caption">
-                    <h1 class="display-6 fw-bold text-light text-shadow">HOLD INTERACTIVE MEETINGS </h1>
+                    <h1 class="display-6 fw-bold text-light text-shadow">EASY INTERACTION AMONG CLIENTS AND FREELANCERS</h1>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#interiorCarousel" data-bs-slide="prev">
@@ -345,7 +346,8 @@
         <div class="container">
             <h2 class="services-heading">Explore Services Available</h2>
             <div class="service-cards">
-              
+
+                    @* <a href="/Job/SearchJobs/"Web Development"" style="text-decoration: none;"> *@
                  <div class="card">
                     <i class="fas fa-laptop-code service-icon"></i>
                     <h3>Web Development</h3>

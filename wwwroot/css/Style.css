@@ -29,10 +29,10 @@
    
     justify-content: center;
     width: 10%;
-    color: #fff;
+   /* color: #fff;*/
     text-align: center;
     
-    transition: opacity .15s ease;
+  /*  transition: opacit .15s ease;*/
 }
 
     .carousel-control-prev:hover,

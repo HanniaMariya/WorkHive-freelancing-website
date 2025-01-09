@@ -132,13 +132,11 @@ namespace WorkHive.Models.Repositories
         }
         public Freelancer GetFreelancerById(int id)
         {
-            
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
                     conn.Open();
-
                     string query = @"
             SELECT  f.freelancer_id, f.name, f.description, f.profile_pic, 
                    f.language, f.language_level, f.portfolio_link, f.phone
@@ -253,11 +251,11 @@ namespace WorkHive.Models.Repositories
                     cmd.Parameters.AddWithValue("@FreelancerId", freelancer.FreelancerId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected == 0)
-                    {
-                        Console.WriteLine("ROWS:" + rowsAffected);
-                        return false; // If no rows are updated
-                    }
+                    //if (rowsAffected == 0)
+                    //{
+                    //    Console.WriteLine("ROWS:" + rowsAffected);
+                    //    return false; // If no rows are updated
+                    //}
                 }
 
                 // Delete existing skills and re-insert new skills

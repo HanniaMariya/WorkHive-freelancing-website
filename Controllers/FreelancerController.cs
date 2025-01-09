@@ -46,7 +46,7 @@ namespace WorkHive.Controllers
             int freelancer_id = (int)HttpContext.Session.GetInt32("UserId");
             List<string> freelancerSkills=_freelancerRepository.GetSkillNamesByFreelancerId(freelancer_id).ToList();
             JobRepository jobRepository = new JobRepository();
-            List<Job> jobs=jobRepository.SearchJobsBySkills(freelancerSkills);
+            List<Job> jobs=jobRepository.SearchJobsByAnyOfSkills(freelancerSkills);
             return jobs;
         }
         public IActionResult FreelancerDashboard()
@@ -115,13 +115,17 @@ namespace WorkHive.Controllers
             if (ProfilePic != null)
             {
                 var fileName = Path.GetFileName(ProfilePic.FileName);
-                uploadedFilePath = Path.Combine(path, fileName);
 
-                using (var stream = new FileStream(uploadedFilePath, FileMode.Create))
+                // Save using absolute path but store a relative path with a leading '/'
+                string absoluteFilePath = Path.Combine(path, fileName);
+                uploadedFilePath = Path.Combine("/Uploads", fileName); // Added leading '/'
+
+                using (var stream = new FileStream(absoluteFilePath, FileMode.Create))
                 {
                     ProfilePic.CopyTo(stream);
                 }
             }
+
             int? id = HttpContext.Session.GetInt32("UserId");
             if (id == null)
                 return RedirectToAction("Login", "User");
@@ -158,8 +162,7 @@ namespace WorkHive.Controllers
         public IActionResult FreelancerDetails(int freelancerId)
         {
            Freelancer freelancer = _freelancerRepository.GetFreelancerById(freelancerId);
-
-            return View(freelancer);
+           return View(freelancer);
         }
         public IActionResult ViewFreelancers()
         {
@@ -172,13 +175,11 @@ namespace WorkHive.Controllers
             int id = (int)HttpContext.Session.GetInt32("UserId");
             Freelancer freelancer = new Freelancer();
             freelancer = _freelancerRepository.GetFreelancerById((int)id);
-          
             return View(freelancer);
         } 
         [HttpPost]
         public IActionResult UpdateProfile(Freelancer freelancer)
         {
-            
             _freelancerRepository.UpdateFreelancer(freelancer);
             return RedirectToAction("Profile");  
         }

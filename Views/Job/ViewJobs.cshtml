@@ -2,117 +2,146 @@
 @{
     Layout = "_navbar";
 }
-
-
 <div class="page-container py-2">
 
     <!-- Header Section -->
-    <header class="text-center mb-5">
-        <h1 class="page-title fw-bold">Find the Perfect Job</h1>
+    <header class="text-center mb-5 mt-3">
+        <h1 class="page-title text-dark fw-normal">Find the Perfect Job</h1>
         <p class="text-muted mb-4">Browse from a wide range of categories and apply to jobs that match your skills.</p>
     </header>
 
     <!-- Services Section -->
     <section class="services-section mb-5">
-        <h2 class="section-title fw-bold mb-4 text-center">Popular Categories</h2>
+        <h2 class=" text-dark fw-bold mb-4 text-center">Popular Categories</h2>
         <div class="service-cards-container d-flex justify-content-center gap-4 flex-wrap">
             @foreach (var service in new string[]
             {
                 "Web Development", "Graphic Design", "Content Writing", "SEO",
                 "Digital Marketing", "App Development",
-                "Writing & Translation", "Video Editing","Cyber Security", "AI Services"
+                "Writing & Translation", "Video Editing", "Photography", "Data Analysis", "Animation","Financial Support",  "Cyber Security", "AI Services"
             })
             {
                 <div class="service-card text-center p-4 shadow-sm rounded">
                     <div class="icon-container mb-2">
                         @if (service == "Web Development")
                         {
-                            <i class="fas fa-laptop-code fa-2x text-success"></i>
+                            <i class="fas fa-laptop-code fa-2x text-primary"></i>
                         }
                         @if (service == "Graphic Design")
                         {
-                        <i class="fas fa-paint-brush fa-2x text-success"></i>
+                            <i class="fas fa-paint-brush fa-2x text-danger"></i>
                         }
                         @if (service == "Content Writing")
                         {
-                        <i class="fas fa-pen fa-2x text-success"></i>
+                            <i class="fas fa-pen fa-2x text-info"></i>
                         }
                         @if (service == "SEO")
                         {
-                        <i class="fas fa-search fa-2x text-success"></i>
+                            <i class="fas fa-search fa-2x text-secondary"></i>
                         }
                         @if (service == "Digital Marketing")
                         {
-                        <i class="fas fa-bullhorn fa-2x text-success"></i>
+                            <i class="fas fa-bullhorn fa-2x text-warning"></i>
                         }
                         @if (service == "App Development")
                         {
-                        <i class="fas fa-mobile-alt fa-2x text-success"></i>
+                            <i class="fas fa-mobile-alt fa-2x text-primary"></i>
                         }
                         @if (service == "Writing & Translation")
                         {
-                        <i class="fas fa-language fa-2x text-success"></i>
+                            <i class="fas fa-language fa-2x text-danger"></i>
                         }
                         @if (service == "Video Editing")
                         {
-                            <i class="fas fa-video fa-2x text-success"></i>
-                        } 
+                            <i class="fas fa-video fa-2x text-dark"></i>
+                        }
+                        @if (service == "Photography")
+                        {
+                            <i class="fas fa-camera fa-2x text-warning"></i>
+                        }
+                        @if (service == "Data Analysis")
+                        {
+                            <i class="fas fa-chart-line fa-2x text-info"></i>
+                        }
+                        @if (service == "Animation")
+                        {
+                            <i class="fas fa-film fa-2x text-danger"></i>
+                        }
+                        @if (service == "Financial Support")
+                        {
+                            <i class="fas fa-credit-card fa-2x text-primary"></i>
+                        }
                         @if (service == "Cyber Security")
                         {
                             <i class="fas fa-shield-alt fa-2x text-success"></i>
                         }
                         @if (service == "AI Services")
                         {
-                        <i class="fas fa-brain fa-2x text-success"></i>
+                            <i class="fas fa-brain fa-2x text-muted"></i>
                         }
+
                     </div>
-                    <p class="service-name fw-bold text-success">@service</p>
+                    <p class="service-name fw-bold text-muted">@service</p>
                 </div>
             }
         </div>
     </section>
 
-    <!-- Search and Filter Section -->
-   @*  <section class="search-filter-section mb-5">
-        <div class="card shadow-sm p-4"> *@
-
-           @*  <h3 class="section-title text-success fw-bold mb-3 text-center">Filter Jobs</h3> *@
-            <form method="get" action="/Job/SearchJobs" class="row g-3 justify-content-center">
-              @*   <div class="col-md-3">
-                    <input type="number" name="budget" class="form-control form-control-lg" placeholder="Filter by budget" />
-                </div> *@
-                <div class="col-md-3">
-                    <select name="skills" class="form-select form-select-lg" multiple>
-                        <option value="Web Development">Web Development</option>
-                        <option value="Graphic Design">Graphic Design</option>
-                        <option value="Content Writing">Content Writing</option>
-                        <option value="SEO">SEO</option>
-                        <option value="Digital Marketing">Digital Marketing</option>
-                        <option value="App Development">App Development</option>
-                        <option value="Cyber Security">Cyber Security</option>
-                        <option value="Writing & Translation">Writing & Translation</option>
-                        <option value="Video Editing">Video Editing</option>
-                        <option value="AI Services">AI Services</option>
-                        <option value="Data Analysis">Data Analysis</option>
-                    </select>
-                   
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-success w-70 py-3">Apply Filter</button>
-                </div>
-            </form>
-
-        @* </div>
-    </section> *@
 
     <!-- Jobs List Section -->
-    <section class="jobs-list-section">
-        <h3 class="section-title text-success fw-bold m-4 text-center">Available Jobs</h3>
+    <section class="jobs-list-section m-5">
+        <h3 class="text-success p-1 mb-0">Browse Jobs</h3>
+        <hr class="section-divider" />
+        <form asp-action="SearchJobs" method="get" class="mt-2 d-flex justify-content-center">
+           
+            <div class="row filter-row w-100 justify-content-center">
+                <!-- Budget Input -->
+                <div class="form-group col-md-4 p-2">
+                    <label for="budget">Budget (Max)</label>
+                    <input type="number" name="budget" id="budget" class="form-control" placeholder="Enter budget">
+                </div>
+
+                <!-- Skills Dropdown with Checkboxes -->
+                <div class="form-group col-md-4 p-2">
+                    <label for="skills">Skills required</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="skillsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Choose Skills
+                        </button>
+                        <ul class="dropdown-menu w-100 p-3 " aria-labelledby="skillsDropdown">
+                            <li><input type="checkbox" name="skills" value="Web Development"> Web Development</li>
+                            <li><input type="checkbox" name="skills" value="Programming & Tech"> Programming & Tech</li>
+                            <li><input type="checkbox" name="skills" value="App Development"> App Development</li>
+                            <li><input type="checkbox" name="skills" value="Cyber Security"> Cyber Security</li>
+                            <li><input type="checkbox" name="skills" value="Graphic Design"> Graphic Design</li>
+                            <li><input type="checkbox" name="skills" value="Content Writing"> Content Writing</li>
+                            <li><input type="checkbox" name="skills" value="SEO"> SEO</li>
+                            <li><input type="checkbox" name="skills" value="Digital Marketing"> Digital Marketing</li>
+                            <li><input type="checkbox" name="skills" value="Social Media Management"> Social Media Management</li>
+                            <li><input type="checkbox" name="skills" value="Writing & Translation"> Writing & Translation</li>
+                            <li><input type="checkbox" name="skills" value="Photography & Videography"> Photography & Videography</li>
+                            <li><input type="checkbox" name="skills" value="Video Editing"> Video Editing</li>
+                            <li><input type="checkbox" name="skills" value="Animation"> Animation</li>
+                            <li><input type="checkbox" name="skills" value="AI Services"> AI Services</li>
+                            <li><input type="checkbox" name="skills" value="Data Analysis"> Data Analysis</li>
+                            <li><input type="checkbox" name="skills" value="Financial Support"> Financial Support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group col-md-4 p-2 align-self-end">
+                    <button type="submit" class="btn btn-success w-100 ">Apply Filter(s)</button>
+                </div>
+            </div>
+        </form>
+        <hr class="section-divider" />
         @await Html.PartialAsync("_JobsList", Model)
     </section>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     /* General Styling */
 
@@ -124,21 +153,28 @@
     }
 
     .page-title {
-        color: #006644;
+      
         font-size: 3rem;
         margin-bottom: 10px;
-        font-weight: 700;
+        
     }
 
     .section-title {
         color: #006644;
         font-size: 1.75rem;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .text-muted {
         font-size: 1rem;
+    }
+
+    .section-divider {
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 20px 0;
     }
 
     /* Service Section */
@@ -184,6 +220,11 @@
         border-radius: 10px;
     }
 
+    .filter-row
+    {
+        margin-right:50px;
+        margin-left:50px;
+    }
     .form-control,
     .form-select,
     .btn {

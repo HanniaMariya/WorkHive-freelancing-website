@@ -46,7 +46,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <a class="navbar-brand" href="#">WorkHive</a>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">WorkHive</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,7 +71,7 @@
 
             <div class="ml-auto nav-buttons">
                 <button class="btn btn-primary" onclick="location.href='/job/postJob';">Post a Job</button>
-                <button class="btn btn-outline-primary" onclick="location.href='Profile';">Profile</button>
+                <button class="btn btn-outline-primary" onclick="location.href='/Freelancer/Profile';">Profile</button>
                 <button class="btn btn-outline-success " onclick="location.href='/user/Logout';">Logout</button>
 
             </div>
@@ -84,9 +84,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer bg-dark text-white p-2 ">
         <div class="container">
-            &copy; 2024 - WorkHive - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 WorkHive. All Rights Reserved.</p>
+            </div>
+            <p class="text-center"> <a asp-area="" asp-controller="Home" asp-action="About">About Us</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

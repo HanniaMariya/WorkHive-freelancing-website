@@ -6,13 +6,8 @@
 
 <div class="freelancer-edit-profile mt-5 mx-auto p-4" style="max-width: 800px; background-color: #ffffff; border-radius: 12px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
     <!-- Profile Picture -->
-   
     <div class="text-center mb-4">
         <img src="@Model.ProfilePic" alt="Profile Picture" class="profile-pic rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #388e3c;" />
-       @*  <div>
-            <label for="profilePic" class="form-label text-dark-green fw-bold">Update Profile Picture</label>
-            <input type="file" id="profilePic" name="ProfilePic" class="form-control" />
-        </div> *@
     </div>
 
     <form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
@@ -43,11 +38,21 @@
             <input type="text" id="languageLevel" name="LanguageLevel" value="@Model.LanguageLevel" class="form-control" />
         </div>
 
-      @*   <!-- Skills -->
+        <!-- Skills -->
         <div class="mb-4">
-            <label for="skills" class="form-label text-dark-green fw-bold">Skills</label>
-            <textarea id="skills" name="Skills" class="form-control" rows="3" placeholder="Enter skills separated by commas">@string.Join(", ", Model.skills.Select(s => s.skill_name))</textarea>
-        </div> *@
+            <label class="form-label text-dark-green fw-bold">Skills</label>
+            <div id="skills-container">
+                @for (int i = 0; i < Model.skills.Count; i++)
+                {
+                    <div class="d-flex align-items-center mb-2 gap-3">
+                        <input type="text" name="Skills[@i].skill_name" value="@Model.skills[i].skill_name" class="form-control" placeholder="Enter skill" required />
+                        <input type="text" name="Skills[@i].experience_level" value="@Model.skills[i].experience_level" class="form-control" placeholder="Enter experience level" required />
+                        <button type="button" class="btn btn-danger remove-skill-btn">Remove</button>
+                    </div>
+                }
+            </div>
+            <button type="button" id="add-skill-btn" class="btn btn-primary mt-2">Add Skill</button>
+        </div>
 
         <!-- Portfolio -->
         <div class="mb-4">
@@ -62,52 +67,54 @@
         </div>
 
         <!-- Submit Button -->
+        <!-- Submit Button -->
         <div class="text-center">
             <button type="submit" class="btn btn-apply w-50">Save Changes</button>
         </div>
+
     </form>
 </div>
 
+<script>
+    document.getElementById('add-skill-btn').addEventListener('click', function () {
+        const skillsContainer = document.getElementById('skills-container');
+        const index = skillsContainer.children.length;
+        const newSkill = document.createElement('div');
+        newSkill.classList.add('d-flex', 'align-items-center', 'mb-2', 'gap-3');
+        newSkill.innerHTML = `
+                <input type="text" name="skills[${index}].skill_name" class="form-control" placeholder="Enter skill" required />
+                <input type="text" name="skills[${index}].experience_level" class="form-control" placeholder="Enter experience level (e.g., Beginner, Intermediate, Advanced)" required />
+                <button type="button" class="btn btn-danger remove-skill-btn">Remove</button>
+            `;
+        skillsContainer.appendChild(newSkill);
+
+        // Add the event listener for the "Remove" button after the new skill is added
+        newSkill.querySelector('.remove-skill-btn').addEventListener('click', function () {
+            newSkill.remove();
+        });
+    });
+
+    // Event delegation for dynamically created "Remove" buttons
+    document.getElementById('skills-container').addEventListener('click', function (event) {
+        if (event.target.classList.contains('remove-skill-btn')) {
+            event.target.closest('.d-flex').remove();
+        }
+    });
+</script>
 <style>
-    /* General Styling */
-    body {
-        background-color: #f7f8fa;
-        font-family: 'Arial', sans-serif;
-    }
+/* Apply Button */
+.btn-apply {
+    background-color: green;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+}
 
-    .freelancer-edit-profile {
-        padding: 20px;
-    }
-
-    .form-label {
-        margin-bottom: 5px;
-    }
-
-    .profile-pic {
-        border: 3px solid #388e3c;
-    }
-
-    .text-dark-green {
-        color: #1e5631;
-    }
-
-    .fw-bold {
-        font-weight: bold;
-    }
-
-    /* Button */
-    .btn-apply {
-        background-color: green;
-        color: white;
-        padding: 0.7rem 1.5rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 25px;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .btn-apply:hover {
-        background-color: #1dbf73;
-        transform: scale(1.05);
-    }
+.btn-apply:hover {
+    background-color: #1dbf73;
+    transform: scale(1.05);
+}
 </style>

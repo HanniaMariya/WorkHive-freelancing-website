@@ -79,11 +79,16 @@ namespace WorkHive.Controllers
             var jobs = new List<Job>();
             if (skills != null && skills.Any())
             {
-                jobs = _jobRepository.SearchJobsBySkills(skills);
+                jobs = _jobRepository.SearchJobsByAllOfSkills(skills);
             }
-            if (budget.HasValue)
+            else
             {
-                jobs = (List<Job>)jobs.Where(job => job.budget <= budget.Value);
+                jobs = _jobRepository.GetAllJobs();
+            }
+            if (budget.HasValue && budget>0)
+            {
+                jobs = jobs.Where(job => job.budget <= budget.Value).ToList();
+
             }
             return View(jobs);
         }

@@ -80,6 +80,26 @@ public class JobRepository
                 }
             }
         }
+         public void UpdateStatus(int jobId,string status)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var query = @"UPDATE Jobs
+                          SET status = @status
+                          WHERE job_id = @job_id";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@job_id", jobId);
+                   
+                    command.Parameters.AddWithValue("@status", status);
+                   
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         // DELETE Job
         public void DeleteJob(int jobId)
@@ -115,6 +135,65 @@ public class JobRepository
                 sr.skillRequired_id, sr.skill_name
             FROM Jobs j
             LEFT JOIN SkillsRequired sr ON j.job_id = sr.job_id";
+
+                using (var command = new SqlCommand(query, connection))
+                using (var reader = command.ExecuteReader())
+                {
+                    var jobMap = new Dictionary<int, Job>();
+
+                    while (reader.Read())
+                    {
+                        int jobId = (int)reader["job_id"];
+
+                        if (!jobMap.ContainsKey(jobId))
+                        {
+                            var job = new Job
+                            {
+                                job_id = jobId,
+                                client_id = reader["client_id"] as int?,
+                                title = reader["title"].ToString(),
+                                description = reader["description"].ToString(),
+                                budget = reader["budget"] as decimal?,
+                                status = reader["status"].ToString(),
+                                PostedAt = (DateTime)reader["posted_at"]
+                            };
+
+                            jobMap[jobId] = job;
+                            jobs.Add(job);
+                        }
+
+                        if (reader["skillRequired_id"] != DBNull.Value)
+                        {
+                            var skill = new SkillRequired
+                            {
+                                skillRequired_id = (int)reader["skillRequired_id"],
+                                job_id = jobId,
+                                skill_name = reader["skill_name"].ToString()
+                            };
+
+                            jobMap[jobId].skillsRequired.Add(skill);
+                        }
+                    }
+                }
+            }
+
+            return jobs;
+        }
+            public List<Job> GetAllOpenJobs()
+        {
+            var jobs = new List<Job>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = @"
+            SELECT 
+                j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at,
+                sr.skillRequired_id, sr.skill_name
+            FROM Jobs j
+            LEFT JOIN SkillsRequired sr ON j.job_id = sr.job_id
+            Where j.status='Open'";
 
                 using (var command = new SqlCommand(query, connection))
                 using (var reader = command.ExecuteReader())
@@ -211,7 +290,6 @@ public class JobRepository
                         }
                     }
                 }
-
                 return null;
             }
         }
@@ -313,7 +391,7 @@ public class JobRepository
             return skills;
         }
      
-        public List<Job> SearchJobsBySkills(List<string> requiredSkills)
+        public List<Job> SearchJobsByAllOfSkills(List<string> requiredSkills)
         {
             var jobs = new List<Job>();
 
@@ -324,15 +402,13 @@ public class JobRepository
                 // Create dynamic conditions for each skill
                 var placeholders = string.Join(",", requiredSkills.Select((_, index) => $"@skill{index}"));
                 var query = $@"
-SELECT DISTINCT j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at
-FROM Jobs j
-INNER JOIN SkillsRequired sr ON j.job_id = sr.job_id
-WHERE sr.skill_name IN ({placeholders})
-GROUP BY j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at
-HAVING COUNT(DISTINCT sr.skill_name) >= @skillsCount";
-
-             
-
+                SELECT DISTINCT j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at
+                FROM Jobs j
+                INNER JOIN SkillsRequired sr ON j.job_id = sr.job_id
+                WHERE sr.skill_name IN ({placeholders})
+                GROUP BY j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at
+                HAVING COUNT(DISTINCT sr.skill_name) >= @skillsCount";
+                
                 using (var command = new SqlCommand(query, connection))
                 {
                     for (int i = 0; i < requiredSkills.Count; i++)
@@ -359,21 +435,69 @@ HAVING COUNT(DISTINCT sr.skill_name) >= @skillsCount";
                                 PostedAt = (DateTime)reader["posted_at"]
                             };
 
-
                             // Now populate the skillsRequired for each job
                             job.skillsRequired = GetSkillsByJobId(job.job_id);
-
                             jobs.Add(job);
                         }
                     }
                 }
             }
-
             return jobs;
-        } 
+        }  
+       public List<Job> SearchJobsByAnyOfSkills(List<string> requiredSkills)
+       {
+           var jobs = new List<Job>();
+           if (requiredSkills.Count == 0)
+           {
+               return jobs; 
+           }
+       
+           using (SqlConnection connection = new SqlConnection(_connectionString))
+           {
+               connection.Open();
+       
+               // Create dynamic conditions for each skill
+               var placeholders = string.Join(",", requiredSkills.Select((_, index) => $"@skill{index}"));
+               var query = $@"
+               SELECT DISTINCT j.job_id, j.client_id, j.title, j.description, j.budget, j.status, j.posted_at
+               FROM Jobs j
+               INNER JOIN SkillsRequired sr ON j.job_id = sr.job_id
+               WHERE sr.skill_name IN ({placeholders})  AND j.status='Open'";
+       
+               using (var command = new SqlCommand(query, connection))
+               {
+                   for (int i = 0; i < requiredSkills.Count; i++)
+                   {
+                       command.Parameters.AddWithValue($"@skill{i}", requiredSkills[i]);
+                   }
+       
+                   using (var reader = command.ExecuteReader())
+                   {
+                       while (reader.Read())
+                       {
+                           var job = new Job
+                           {
+                               job_id = (int)reader["job_id"],
+                               client_id = reader["client_id"] as int?,
+                               title = reader["title"].ToString(),
+                               description = reader["description"] as string,
+                               budget = reader["budget"] as decimal?,
+                               status = reader["status"].ToString(),
+                               PostedAt = (DateTime)reader["posted_at"]
+                           };
+       
+                           // Now populate the skillsRequired for each job
+                           job.skillsRequired = GetSkillsByJobId(job.job_id);
+                           jobs.Add(job);
+                       }
+                   }
+               }
+           }
+           return jobs;
+       }
+
         // Helper function to get the skills required for a specific job
       
-
         //// SEARCH Jobs by List of Skills
         //public List<Job> SearchJobsBySkills(List<string> requiredSkills)
         //{

@@ -2,50 +2,69 @@
 @{
     Layout = "_navbar";
 }
-<div class="page-container py-3">
-    <!-- Search and Filter Section -->
-     <section class="search-filter-section mb-5">
-    <div class="card p-3">
+<div class="page-container py-3 m-4 ">
 
-     <h3 class="section-title text-success mb-3 text-center">Filter Jobs by Budget / Services</h3>
-    <form method="get" action="/Job/SearchJobs" class="row g-2 justify-content-center">
-     @*    <div class="col-md-3">
-            <input type="number" name="budget" class="form-control form-control-lg" placeholder="Filter by budget" />
-        </div> *@
-        <div class="col-md-3">
-            <select name="skills" class="form-select form-select-lg" multiple>
-                <option value="Web Development">Web Development</option>
-                <option value="Graphic Design">Graphic Design</option>
-                <option value="Content Writing">Content Writing</option>
-                <option value="SEO">SEO</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="App Development">App Development</option>
-                <option value="Cyber Security">Cyber Security</option>
-                <option value="Writing & Translation">Writing & Translation</option>
-                <option value="Video Editing">Video Editing</option>
-                <option value="AI Services">AI Services</option>
-                <option value="Data Analysis">Data Analysis</option>
-            </select>
+    <h2 class="text-success m-3 ">Browse Jobs</h2>
+    <hr class="section-divider" />
+    <form asp-action="SearchJobs" method="get" class="d-flex justify-content-center">
+        <div class="row w-100 justify-content-center">
+            <!-- Budget Input -->
+            <div class="form-group col-md-4">
+                <label for="budget">Budget (Max)</label>
+                <input type="number" name="budget" id="budget" class="form-control" placeholder="Enter budget">
+            </div>
 
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-success w-70 py-3">Apply Filter</button>
+            <!-- Skills Dropdown with Checkboxes -->
+            <div class="form-group col-md-4">
+                <label for="skills">Skills required</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="skillsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose Skills
+                    </button>
+                    <ul class="dropdown-menu w-100 p-3 " aria-labelledby="skillsDropdown">
+                        <li><input type="checkbox" name="skills" value="Web Development"> Web Development</li>
+                        <li><input type="checkbox" name="skills" value="Programming & Tech"> Programming & Tech</li>
+                        <li><input type="checkbox" name="skills" value="App Development"> App Development</li>
+                        <li><input type="checkbox" name="skills" value="Cyber Security"> Cyber Security</li>
+                        <li><input type="checkbox" name="skills" value="Graphic Design"> Graphic Design</li>
+                        <li><input type="checkbox" name="skills" value="Content Writing"> Content Writing</li>
+                        <li><input type="checkbox" name="skills" value="SEO"> SEO</li>
+                        <li><input type="checkbox" name="skills" value="Digital Marketing"> Digital Marketing</li>
+                        <li><input type="checkbox" name="skills" value="Social Media Management"> Social Media Management</li>
+                        <li><input type="checkbox" name="skills" value="Writing & Translation"> Writing & Translation</li>
+                        <li><input type="checkbox" name="skills" value="Photography & Videography"> Photography & Videography</li>
+                        <li><input type="checkbox" name="skills" value="Video Editing"> Video Editing</li>
+                        <li><input type="checkbox" name="skills" value="Animation"> Animation</li>
+                        <li><input type="checkbox" name="skills" value="AI Services"> AI Services</li>
+                        <li><input type="checkbox" name="skills" value="Data Analysis"> Data Analysis</li>
+                        <li><input type="checkbox" name="skills" value="Financial Support"> Financial Support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group col-md-4 align-self-end">
+                <button type="submit" class="btn btn-success w-100">Apply Filter(s)</button>
+            </div>
         </div>
     </form>
+    <hr class="section-divider" />
 
-    </div>
-    </section>
+
 
     <!-- Jobs List Section -->
     <section class="jobs-list-section">
-        <h3 class="section-title text-success fw-bold text-center">Available Jobs</h3>
+      
         @await Html.PartialAsync("_JobsList", Model)
     </section>
 
 </div>
+<!-- Bootstrap JS and dependencies (Ensure these are included) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <style>
-    /* General Styling */
+   
 
     .page-container {
         background-color: #f8f9fa;
@@ -62,12 +81,16 @@
     }
 
     .section-title {
-        color: #006644;
-        font-size: 1.75rem;
-        font-weight: 600;
-        margin-bottom: 20px;
+        
+        margin-bottom: 40px;
     }
 
+    .section-divider {
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 20px 0;
+    }
     .text-muted {
         font-size: 1rem;
     }
@@ -85,10 +108,10 @@
     }
 
     .btn-success {
-        background-color: #2d6a4f;
+       /*  background-color: #2d6a4f; */
         border: none;
         transition: background-color 0.3s ease;
-        font-weight: 600;
+      /*   font-weight: 600; */
     }
 
     .btn-success:hover {
@@ -120,11 +143,6 @@
         gap: 1.5rem;
     }
 
-   /*  .py-5 {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-    }
- */
-    /* Responsiveness */
+ 
 
 </style>

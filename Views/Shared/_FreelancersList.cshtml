@@ -6,44 +6,50 @@
         {
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="freelancer-card shadow-sm">
-                    <div class="card-header">
-                        <img src="@freelancer.ProfilePic" alt="@freelancer.Name" class="profile-pic" />
-                    </div>
-                    <div class="card-body">
-                        <h3 class="freelancer-name">@freelancer.Name</h3>
-                        <p class="description">
-                            @if (!string.IsNullOrEmpty(freelancer.Description) && freelancer.Description.Length > 100)
-                            {
-                                @($"{freelancer.Description.Substring(0, 100)}...")
-                            }
-                            else
-                            {
-                                @freelancer.Description
-                            }
-                        </p>
-                        <p class="language">
-                            <strong>Language:</strong> @freelancer.Language
-                            <span class="language-level">(@freelancer.LanguageLevel)</span>
-                        </p>
-                        <a href="@freelancer.PortfolioLink" class="portfolio-link" target="_blank">View Portfolio</a>
-                    </div>
-                    <div class="card-footer">
-                        <p class="skills-title">Skills:</p>
-                        <div class="skills">
-                            @foreach (var skill in freelancer.skills)
-                            {
-                                <span class="skill">@skill.skill_name</span>
-                            }
+                    <a href="@Url.Action("FreelancerDetails", "Freelancer", new { freelancerId = freelancer.FreelancerId })" style="text-decoration: none;">
+
+
+                        <div class="card-header">
+                            <img src="@freelancer.ProfilePic" alt="@freelancer.Name" class="profile-pic" />
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <h3 class="freelancer-name">@freelancer.Name</h3>
+                            <p class="description">
+                                @if (!string.IsNullOrEmpty(freelancer.Description) && freelancer.Description.Length > 100)
+                                {
+                                    @($"{freelancer.Description.Substring(0, 100)}...")
+                                }
+                                else
+                                {
+                                    @freelancer.Description
+                                }
+                            </p>
+                            <p class="language">
+                                <strong>Language:</strong> @freelancer.Language
+                                <span class="language-level">(@freelancer.LanguageLevel)</span>
+                            </p>
+                            <a href="@freelancer.PortfolioLink" class="portfolio-link" target="_blank">View Portfolio</a>
+                        </div>
+                        <div class="card-footer">
+                            <p class="skills-title">Skills:</p>
+                            <div class="skills">
+                                @foreach (var skill in freelancer.skills)
+                                {
+                                    <span class="skill">@skill.skill_name</span>
+                                }
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         }
+      
     </div>
 </div>
 
 <style>
     .freelancer-card {
+        max-width:400px;
         background-color: #f9f9f9;
         border: 1px solid #ddd;
         border-radius: 10px;
@@ -58,7 +64,7 @@
 
     .card-header {
         text-align: center;
-        padding: 15px;
+       /*  padding: 15px; */
         background-color: #f0f0f0;
     }
 
@@ -70,10 +76,10 @@
         border: 2px solid #ddd;
     }
 
-    .card-body {
+    /* .card-body {
         padding: 15px;
     }
-
+ */
     .freelancer-name {
         font-size: 18px;
         font-weight: bold;
@@ -109,7 +115,7 @@
     }
 
     .card-footer {
-        padding: 10px 15px;
+        /* padding: 10px; */
         background-color: #f8f8f8;
         border-top: 1px solid #ddd;
     }

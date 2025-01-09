@@ -1,0 +1,102 @@
+﻿@model WorkHive.Models.ViewModels.FreelancerApplication
+@{
+    Layout = "_LayoutClient";
+}
+
+<div class=" head text-center m-4">
+    <h1 class="fw-normal">Application Details</h1>
+</div>
+<div class="container-my">
+    <!-- Application Details Header -->
+  
+
+    <div class="row">
+        <!-- Freelancer Info (Left Side) -->
+        <div class="col-lg-4 col-md-5 mb-4">
+            <div class="d-flex flex-column align-items-start">
+                <img src="@Model.freelancer.ProfilePic" alt="Freelancer Picture" class="profile-pic mb-3 rounded-circle">
+                <h5 class="text-dark mb-3">@Model.freelancer.Name</h5>
+                <p class="text-muted mb-1"><span class="text-dark">Language:</span> @Model.freelancer.Language (@Model.freelancer.LanguageLevel)</p>
+                <p class="text-muted mb-1"><span class="text-dark">Phone: </span>@Model.freelancer.Phone</p>
+                <p class="text-muted mb-2"><span class="text-dark">Description:</span> @Model.freelancer.Description</p>
+                <a href="@Model.freelancer.PortfolioLink" target="_blank" class="btn btn-outline-primary w-100 mb-1">View Portfolio</a>
+
+                <div class="mt-4">
+                    <h6 class="text-dark fw-normal">Skills</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach (var skill in Model.freelancer.skills)
+                        {
+                            <span class="badge skill-badge">@skill.skill_name</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Proposal Letter (Right Side) -->
+        <div class="col-lg-8 col-md-7 mb-4">
+            <div class="card p-4">
+                <h3 class="fw-normal">Proposal Letter</h3>
+                <p>@Model.app.proposal</p>
+
+                <!-- Actions: Hire, Reject, Back -->
+                <div class="mt-4 d-flex justify-content-between">
+                    <button class="btn btn-success bts" onclick="location.href='/application/accept?appId=@Model.app.app_id'">Hire</button>
+                    <button class="btn btn-danger bts" onclick="location.href='/application/reject?appId=@Model.app.app_id'">Reject</button>
+                    <button class="btn btn-secondary bts" onclick="location.href='/application/viewapplicationsforjob?jobId=@Model.app.job_id'">Back to Applications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Styling -->
+<style>
+ 
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border:1px solid lightgrey;
+    }
+
+    .skill-badge {
+        background-color: #F5F5F5;
+        color: #388E3C;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    .container-my {
+      /*   padding: 10px 100px; */
+        border-radius:5px;
+        border:1px solid lightgrey;
+        max-width: 1000px;
+        margin:10px 120px;
+       
+    }
+    .row
+    {
+        padding:15px;
+        background-color: #f9f9f9;
+    }
+    .card {
+        border:none;
+        border-left:1px solid grey;
+        background-color: #f9f9f9;
+    }
+
+    .bts {
+        width: 32%; /* Width remains the same */
+        padding: 6px 3px; /* Reduced padding for lesser height */
+        font-size: 1rem; /* Slightly smaller font for a compact look */
+        line-height: 1.2; /* Adjusted line height for better balance */
+    }
+
+
+   
+</style>

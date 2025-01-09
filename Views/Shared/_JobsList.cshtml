@@ -3,6 +3,9 @@
     Layout = null;
 }
 
+@if (Model!=null && Model.Any())
+{ 
+
 <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
     <div>
         @foreach (var job in Model)
@@ -14,9 +17,9 @@
                     </p>
                     <h3 style="color: #1b5e20; margin: 0;">@job.title</h3>
                     <p style="margin: 10px 0; color: #424242;">
-                        @if (job.description.Length > 100)
+                        @if (job.description.Length > 200)
                         {
-                            @($"{job.description.Substring(0, 100)}...")
+                            @($"{job.description.Substring(0, 200)}...")
                             <span style="color: #388e3c; cursor: pointer; display:inline"> Read More </span>
                         }
                         else
@@ -33,7 +36,7 @@
                         <div style="display: flex; flex-wrap: wrap; gap: 5px;">
                             @foreach (var skill in job.skillsRequired)
                             {
-                                <span style="background-color: #a5d6a7; color: #1b5e20; padding: 5px 10px; border-radius: 20px; font-size: 12px;">@skill.skill_name</span>
+                                <span style="background-color: #c8e6c9; color: #1b5e20; padding: 5px 10px; border-radius: 20px; font-size: 12px;">@skill.skill_name</span>
                             }
                         </div>
                     </div>
@@ -42,6 +45,10 @@
         }
     </div>
 </div>
+}
+else{
+    <p class="text-muted text-center">No relevant jobs found.</p>
+}
 
 <style>
     /* Hover effect for the job card */

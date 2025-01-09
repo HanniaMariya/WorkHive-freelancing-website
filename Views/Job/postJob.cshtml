@@ -17,21 +17,26 @@
         <textarea name="description" id="Description" class="job-input" rows="4" placeholder="The website should be responsive and contain these features and pages..." required></textarea>
 
         <label for="Budget" class="job-label">Budget:</label>
-        <input type="number" name="budget" id="Budget" class="job-input" step="0.1" required />
+        <input type="number" name="budget" id="Budget" class="job-input" step="0.5" min="1" required />
 
         <label for="Skills" class="job-label">Skills Required:</label>
         <select id="Skills" class="job-input" multiple required>
             <option value="Web Development">Web Development</option>
+            <option value="Programming & Tech">Programming & Tech</option>
+            <option value="App Development">App Development</option>
+            <option value="Cyber Security">Cyber Security</option>
             <option value="Graphic Design">Graphic Design</option>
             <option value="Content Writing">Content Writing</option>
             <option value="SEO">SEO</option>
             <option value="Digital Marketing">Digital Marketing</option>
-            <option value="App Development">App Development</option>
-            <option value="Cyber Security">Cyber Security</option>
+            <option value="Social Media Management">Social Media Management</option>
             <option value="Writing & Translation">Writing & Translation</option>
+            <option value="Photography & Videography">Photography & Videography</option>
             <option value="Video Editing">Video Editing</option>
+            <option value="Animation">Animation</option>
             <option value="AI Services">AI Services</option>
             <option value="Data Analysis">Data Analysis</option>
+            <option value="Financial Support">Financial Support</option>
 
         </select>
         <small class="helper-text">Hold 'Ctrl' (or 'Cmd' on Mac) to select multiple skills</small>

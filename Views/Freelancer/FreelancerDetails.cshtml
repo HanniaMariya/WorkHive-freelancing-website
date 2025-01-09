@@ -3,12 +3,13 @@
     Layout = "_navbar";
 }
 
+
 <div class="freelancer-profile container mt-5 mb-5 p-4 bg-white rounded shadow">
     <!-- Profile Picture -->
     <div class="text-center mb-4">
         <img src="@Model.ProfilePic" alt="Profile Picture" class="profile-pic rounded-circle mb-3" />
         <h2 class="text-dark-green fw-bold">@Model.Name</h2>
-        <p class="text-muted">@Model.Description ?? "No description provided."</p>
+        <p class="text-muted">@Model.Description</p>
     </div>
 
     <hr class="section-divider" />
@@ -35,8 +36,8 @@
 
     <!-- Language -->
     <div class="mb-4">
-        <h5 class="text-dark-green fw-bold">Language Proficiency</h5>
-        <p class="text-dark">@Model.Language - <span class="text-muted">@Model.LanguageLevel ?? "Not specified"</span></p>
+        <h5 class="text-dark-green fw-bold">Language</h5>
+        <p class="text-dark">@Model.Language - <span class="text-muted">@Model.LanguageLevel</span></p>
     </div>
 
     <hr class="section-divider" />
@@ -68,6 +69,14 @@
             <p class="text-muted">No contact information provided.</p>
         }
     </div>
+
+    <hr class="section-divider" />
+
+    <!-- Button -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-back" onclick="location.href='/freelancer/viewFreelancers';">Back to Freelancers</button>
+
+    </div>
 </div>
 
 <style>
@@ -94,7 +103,7 @@
         width: 120px;
         height: 120px;
         object-fit: cover;
-        border: 4px solid #e0e0e0;
+        border: 2px solid #e0e0e0;
     }
 
     /* Typography */
@@ -130,4 +139,19 @@
         background-color: #1e5631;
         color: white;
     }
+
+    .btn-back {
+        background-color: green;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-back:hover {
+            background-color: #1dbf73;
+            transform: scale(1.05);
+        }
 </style>

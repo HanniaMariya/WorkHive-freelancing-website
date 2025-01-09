@@ -4,10 +4,10 @@
     Layout = "_navbar"; // Adjust this if using a shared layout
 }
 
-<div class="container mt-5" style="font-family: Arial, sans-serif;">
+<div class="container mt-4" style="font-family: Arial, sans-serif;">
     <!-- Page Header -->
     <div class="text-center mb-4">
-        <h3 class="display-4" style="color: #1b5e20;">Explore Freelancers</h3>
+        <h3 class="display-4 text-dark"@*  style="color: #0f7f59;" *@>Explore Freelancers</h3>
         <p style="color: #757575;">Find skilled freelancers tailored to your needs.</p>
     </div>
 
@@ -15,11 +15,11 @@
     <div class="filter-section mb-5 p-3 mx-auto"
          style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 500px;">
         <form asp-action="SearchFreelancers" method="get" class="row g-1 align-items-end">
-            <div class="col-8">
+            <div class="col-9">
                 <label for="skill" class="form-label" style="color: #1b5e20;">Filter by Skill:</label>
                 <input type="text" id="skill" name="searchQuery" class="form-control" placeholder="Enter a skill (e.g. SEO)" />
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <button type="submit" class="btn btn-success w-100 h-100"
                         style="background-color: #388e3c; border-color: #2e7d32;">
                     Apply

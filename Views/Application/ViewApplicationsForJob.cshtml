@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WorkHive.Models.ViewModels.FreelancerApplication>
+@{
+    Layout = "_LayoutClient";
+}
+
+    <div class="page-container py-2">
+    <header class="text-center mb-4 mt-3 mb-4">
+        <h1 class="fw-normal">Applications for the Job</h1>
+        <p class="text-muted mb-5">Review and manage freelancers' applications.</p> 
+    </header>
+
+    <!-- Sort Button -->
+  @*   <div class="text-center mb-4">
+       
+        <select class="form-select w-auto d-inline-block" onchange="sortProposals(this.value)">
+            <option value="sort">Sort</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="bestmatch">Best Match</option>
+           
+        </select>
+    </div>*@
+
+    <!-- Proposal Cards Section -->
+    @if (Model != null && Model.Any())
+    {
+    <section class="proposals-section d-flex flex-wrap justify-content-center gap-4">
+        @foreach (var application in Model)
+        {
+            <div class="proposal-card p-4 shadow-sm w-75 d-flex align-items-start bg-light">
+                <img src="@application.freelancer.ProfilePic" alt="Profile Picture" class="profile-pic me-4 rounded-circle">
+                <div class="flex-grow-1 w-50">
+                    <h5 class="text-dark mb-1">@application.freelancer.Name</h5>
+                    <p class="text-muted mb-2">Applied at: @application.app.appliedAt.ToShortDateString()</p>
+                    <p><span class="text-success">Proposal Letter - </span><span>@(application.app.proposal.Length > 130 ? application.app.proposal.Substring(0, 130) + "..." : application.app.proposal)</span></p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                        @foreach (var skill in application.freelancer.skills)
+                        {
+                            <span style="background-color: #c8e6c9; color: #1b5e20; padding: 3px 8px; border-radius: 20px; font-size: 11px;">@skill.skill_name</span>
+                        }
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <button class="btn btn-outline-primary rounded-3" onclick="location.href='/application/viewapplicationdetails?appId=' + @application.app.app_id">View Details</button>
+                    <button class="btn btn-success rounded-3" onclick="location.href='/application/accept?appId=' + @application.app.app_id">Hire</button>
+                    <button class="btn btn-danger rounded-3" onclick="location.href='/application/reject?appId=' + @application.app.app_id">Reject</button>
+                </div>
+            </div>
+        }
+    </section>
+    }
+    else
+    {
+        <p class="text-muted text-center">No relevant applications found.</p>
+    }
+</div>
+
+
+<!-- Styling -->
+<style>
+    .profile-pic {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .proposal-card {
+        /* border-radius: 15px; */
+        transition: box-shadow 0.3s ease;
+        border-bottom:1px solid lightgrey;
+    }
+
+    .proposal-card:hover {
+            transform: scale(1.02); /* Slightly enlarge the card */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Make the shadow more pronounced */
+    }
+
+   
+  
+   /*  .skills-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .skill {
+        background-color: #e8f5e9;
+        color: #388e3c;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+    } */
+</style>
+
+<script>
+    function sortProposals(criteria) {
+        alert('Sorting by ' + criteria); // Placeholder for sorting logic
+    }
+</script>

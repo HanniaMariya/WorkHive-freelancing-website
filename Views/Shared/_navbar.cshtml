@@ -54,7 +54,7 @@
                         <a class="nav-link" href="@Url.Action("Index","Home")">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
+                        <a class="nav-link" href="@Url.Action("About","Home")">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("ViewJobs", "Job")">Find Work</a>
@@ -66,18 +66,23 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Services
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Web Development</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Graphic Design</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Content Writing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">SEO Optimization</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Video Editing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Writing & Translation</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Cybersecurity</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Digital Marketing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">AI Services</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Data Analysis</a>
-                    </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Web Development" })">Web Development</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Graphic Design" })">Graphic Design</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Content Writing" })">Content Writing</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "SEO" })">SEO Optimization</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Photography & Videography" })">Photography & Videography</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Video Editing" })">Video Editing</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Animation" })">Animation</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Writing & Translation" })">Writing & Translation</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Cyber Security" })">Cybersecurity</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Digital Marketing" })">Digital Marketing</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Social Media Management" })">Social Media Management</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "AI Engineering" })">AI Engineering</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Data Analysis" })">Data Analysis</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Programming & Tech" })">Programming & Tech</a>
+                            <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Financial Support" })">Financial Support</a>
+                        </div>
                 </li>
                 </ul>
 
@@ -97,11 +102,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WorkHive - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <section class="footer">
+        @await Html.PartialAsync("_footer")
+    </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

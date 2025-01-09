@@ -204,24 +204,13 @@
                 color: #555;
             }
 
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-        }
-
-       
-
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand" href="#">WorkHive</a>
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">WorkHive</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -231,7 +220,7 @@
                     <a class="nav-link" href="@Url.Action("Index","Home")">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
+                    <a class="nav-link" href="@Url.Action("About","Home")">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("ViewJobs", "Job")">Find Work</a>
@@ -244,16 +233,21 @@
                         Services
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Web Development</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Graphic Design</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Content Writing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">SEO Optimization</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Video Editing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Writing & Translation</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Cybersecurity</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Digital Marketing</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">AI Services</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer")">Data Analysis</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Web Development" })">Web Development</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Graphic Design" })">Graphic Design</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Content Writing" })">Content Writing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "SEO" })">SEO Optimization</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Photography & Videography" })">Photography & Videography</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Video Editing" })">Video Editing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Animation" })">Animation</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Writing & Translation" })">Writing & Translation</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Cyber Security" })">Cybersecurity</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Digital Marketing" })">Digital Marketing</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Social Media Management" })">Social Media Management</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "AI Engineering" })">AI Engineering</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Data Analysis" })">Data Analysis</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Programming & Tech" })">Programming & Tech</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Financial Support" })">Financial Support</a>
                     </div>
                 </li>
             </ul>
@@ -270,7 +264,7 @@
 
     <div id="interiorCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
 
-        <!-- Inner Carousel -->
+        <!-- Inner Carousel-->
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="~/images/a-person-working-from-home-on-a-laptop-in-a-cozy-vibrant-space-filled-with-plants-books-and-colorful-decor-creating-a-warm-and-productive-atmosphere-free-photo.jpg"
@@ -280,19 +274,20 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="~/images/online-financial-transactions-and-payment-successful-closeup-of-hand-using-a-laptop-for-online-banking-login-to-pay-online-photo.jpg"
-                     class="d-block w-100 carousel-image" alt="Financial Transactions">
+                <img src="~/images/people-using-digital-device-while-meeting.jpg"
+                     class="d-block w-100 carousel-image" alt="Meeting">
                 <div class="carousel-caption">
-                    <h1 class="display-6 fw-bold text-light text-shadow">MAKE SECURE PAYMENT TRANSACTIONS</h1>
+                    <h1 class="display-6 fw-bold text-light text-shadow">CONNECT WITH CLIENTS AND FREELANCERS</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="~/images/meeting.jpg"
-                     class="d-block w-100 carousel-image" alt="Meeting">
+                <img src="~/images/pexels-karolina-grabowska-5902918.jpg"
+                     class="d-block w-100 carousel-image" alt="Money">
                 <div class="carousel-caption">
-                    <h1 class="display-6 fw-bold text-light text-shadow">EASY INTERACTION AMONG CLIENTS AND FREELANCERS</h1>
+                    <h1 class="display-6 fw-bold text-light text-shadow">EARN YOUR INCOME ONLINE</h1>
                 </div>
             </div>
+          
             <button class="carousel-control-prev" type="button" data-bs-target="#interiorCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -367,8 +362,6 @@
                     <p>Engaging and SEO-optimized content.</p>
                 </div>
          
-
-                        
                 <div class="card">
                     <i class="fas fa-bullhorn service-icon"></i>
                     <h3>Digital Marketing</h3>
@@ -410,13 +403,9 @@
         </div>
     </section>
 
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 WorkHive. All rights reserved.</p>
-        </div>
-    </footer>
+    <section class="footer">
+            @await Html.PartialAsync("_footer")
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

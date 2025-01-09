@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorkHive.Models.Repositories;
 using WorkHive.Models;
+using WorkHive.Models.ViewModels;
 
 namespace WorkHive.Controllers
 {
@@ -71,12 +72,39 @@ namespace WorkHive.Controllers
             
         }
 
-      
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();    
             return RedirectToAction("Login");
         }
+        //private List<FreelancerApplication> getProposalsForJob(int jobId)
+        //{
+        //    List<FreelancerApplication> list = new List<FreelancerApplication>();
+        //    FreelancerRepository fr = new FreelancerRepository();
+        //    ApplicationRepository ar = new ApplicationRepository();
+        //    List<Application> apps = new List<Application>();
+        //    apps = ar.GetAppsByJobId(jobId);
+        //    FreelancerApplication proposal = new FreelancerApplication();
+        //    Freelancer freelancer = new Freelancer();
+        //    foreach (Application app in apps)
+        //    {
+        //        freelancer = fr.GetFreelancerById(app.freelancer_id);
+        //        proposal.app = app;
+        //        proposal.freelancer = freelancer;
+        //        list.Add(proposal);
+        //    }
+        //    return list;
+        //}
+           
+        //private List<Job> getJobsByClient()
+        //{
+        //    int freelancer_id = (int)HttpContext.Session.GetInt32("UserId");
+        //    List<string> freelancerSkills = _freelancerRepository.GetSkillNamesByFreelancerId(freelancer_id).ToList();
+        //    JobRepository jobRepository = new JobRepository();
+        //    List<Job> jobs = jobRepository.SearchJobsByAnyOfSkills(freelancerSkills);
+        //    return jobs;
+        //}
+       
         public IActionResult ClientDashboard()
         {
             JobRepository jobRepository = new JobRepository();

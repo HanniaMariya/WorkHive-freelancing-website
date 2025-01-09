@@ -7,6 +7,8 @@
         public int job_id { get; set; }
         public string proposal { get; set; }=string.Empty;
         public DateTime appliedAt { get; set; }= DateTime.Now;
+        public string status { get; set; } = "Submitted";
 
     }
+
 }

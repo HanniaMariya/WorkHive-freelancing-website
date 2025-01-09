@@ -9,7 +9,7 @@
     <h2 class="freelancer-subheader">Join as a Freelancer and find work according to your interest and skills!</h2>
 
     <form method="post" enctype="multipart/form-data" action="/Freelancer/CreateFreelancer" class="freelancer-form">
-        <label for="Name" class="freelancer-label">Name:</label>
+        <label for="Name" class="freelancer-label">Username:</label>
         <input type="text" name="Name" id="Name" class="freelancer-input" required /><br />
 
         <label for="Description" class="freelancer-label">Give a brief description of your skills to attract clients:</label>
@@ -47,16 +47,22 @@
             <div class="skill-entry">
                 <select name="skills[0].skill_name" class="freelancer-input" required>
                     <option value="Web Development">Web Development</option>
+                    <option value="Programming & Tech">Programming & Tech</option>
+                    <option value="App Development">App Development</option>
+                    <option value="Cyber Security">Cyber Security</option>
                     <option value="Graphic Design">Graphic Design</option>
                     <option value="Content Writing">Content Writing</option>
                     <option value="SEO">SEO</option>
                     <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Social Media Management">Social Media Management</option>
                     <option value="Writing & Translation">Writing & Translation</option>
+                    <option value="Photography & Videography">Photography & Videography</option>
                     <option value="Video Editing">Video Editing</option>
+                    <option value="Animation">Animation</option>
                     <option value="AI Engineering">AI Engineering</option>
                     <option value="Data Analysis">Data Analysis</option>
+                    <option value="Financial Support">Financial Support</option>
+                   
                 </select>
                 <select name="skills[0].experience_level" class="freelancer-input" required>
                     <option value="Beginner">Beginner</option>
@@ -214,17 +220,22 @@
         skillEntry.className = 'skill-entry';
         skillEntry.innerHTML = `
                 <select name="Skills[${skillIndex}].skill_name" class="freelancer-input" required>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Graphic Design">Graphic Design</option>
-                    <option value="Content Writing">Content Writing</option>
-                    <option value="SEO">SEO</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                    <option value="Writing & Translation">Writing & Translation</option>
-                    <option value="Video Editing">Video Editing</option>
-                    <option value="AI Engineering">AI Engineering</option>
-                    <option value="Data Analysis">Data Analysis</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Programming & Tech">Programming & Tech</option>
+                        <option value="App Development">App Development</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                        <option value="Graphic Design">Graphic Design</option>
+                        <option value="Content Writing">Content Writing</option>
+                        <option value="SEO">SEO</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
+                        <option value="Social Media Management">Social Media Management</option>
+                        <option value="Writing & Translation">Writing & Translation</option>
+                        <option value="Photography & Videography">Photography & Videography</option>
+                        <option value="Video Editing">Video Editing</option>
+                        <option value="Animation">Animation</option>
+                        <option value="AI Engineering">AI Engineering</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Financial Support">Financial Support</option>
                     </select>
                 <select name="Skills[${skillIndex}].experience_level" class="freelancer-input" required>
                     <option value="Beginner">Beginner</option>

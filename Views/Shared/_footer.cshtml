@@ -1,0 +1,124 @@
+﻿<footer class="footer bg-dark text-white pt-4 pb-3">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3"">
+                <h5>About WorkHive</h5>
+                <p class="about" style="font-size:0.9rem;">WorkHive connects freelancers with clients for all types of projects, empowering people to showcase their skills and find the perfect job or freelancer.</p>
+            </div>
+
+            <!-- Services Section -->
+            <div class="col-md-3">
+                <h5>Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Web Development" })" class="text-white">Web Development</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Graphic Design" })" class="text-white">Graphic Design</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Content Writing" })" class="text-white">Content Writing</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "SEO" })" class="text-white">SEO Optimization</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Video Editing" })" class="text-white">Video Editing</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "Digital Marketing" })" class="text-white">Digital Marketing</a></li>
+                    <li><a href="@Url.Action("SearchFreelancers", "Freelancer", new { searchQuery = "AI Services" })" class="text-white">AI Services</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="col-md-3">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/home/About" class="text-white">About Us</a></li>
+                    <li><a href="/home/Privacy" class="text-white">Privacy</a></li>
+                    <li><a href="#" class="text-white">Contact</a></li>
+                    <li><a href="/home/About" class="text-white">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="col-md-3">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled d-flex">
+                    <li><a href="#" class="text-white social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#" class="text-white social-icon"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#" class="text-white social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="#" class="text-white social-icon"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="section-divider" />
+        <div class="text-center mt-4">
+            <p>&copy; 2024 WorkHive. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+    .footer {
+        background-color: #343a40;
+        color: #fff;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left:8px;
+    }
+    .about
+    {
+        text-align:justify;
+        max-width:200px;
+    }
+
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+            .footer a:hover {
+                text-decoration: underline;
+            }
+
+        .footer h5 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight:bold;
+        }
+
+        .footer ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+            .footer ul li {
+                margin-bottom: 8px;
+                font-size:0.9rem;
+            }
+
+        .footer .social-icons i {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        /* Style for rounded white circles around social icons */
+        .footer .social-icon {
+            display: inline-block;
+            /* background-color: #fff; */
+            border:1px solid white;
+            color: #343a40;
+            border-radius: 50%;
+            padding: 12px;
+            margin-right: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .footer .social-icon:hover {
+                background-color: #1dbf73;
+                color: #fff;
+            }
+
+    .section-divider {
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 20px 0;
+    }
+
+
+</style>

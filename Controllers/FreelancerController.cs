@@ -148,16 +148,33 @@ namespace WorkHive.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
+        public IActionResult Search(string searchQuery)
+        {
+            List<Freelancer> freelancers;
+            if (string.IsNullOrWhiteSpace(searchQuery))
+            {
+                freelancers = new List<Freelancer>();
+            }
+            else
+            {
+                freelancers = _freelancerRepository.GetFreelancersBySkill(searchQuery);
+            }
+
+            // Return the partial view instead of the full view
+            return PartialView("_FreelancersList", freelancers);
+        }
+        [HttpGet]
         public IActionResult SearchFreelancers(string searchQuery)
         {
             if (string.IsNullOrWhiteSpace(searchQuery))
             {
                 return View(new List<Freelancer>());
             }
-           var freelancers = _freelancerRepository.GetFreelancersBySkill(searchQuery);
+            var freelancers = _freelancerRepository.GetFreelancersBySkill(searchQuery);
 
             return View(freelancers);
-        } 
+        }
+
         [HttpGet]
         public IActionResult FreelancerDetails(int freelancerId)
         {

@@ -92,8 +92,7 @@
     <section class="jobs-list-section m-5">
         <h3 class="text-success p-1 mb-0">Browse Jobs</h3>
         <hr class="section-divider" />
-        <form asp-action="SearchJobs" method="get" class="mt-2 d-flex justify-content-center">
-           
+        <form id="searchJobsForm" class="mt-2 d-flex justify-content-center">
             <div class="row filter-row w-100 justify-content-center">
                 <!-- Budget Input -->
                 <div class="form-group col-md-4 p-2">
@@ -109,6 +108,7 @@
                             Choose Skills
                         </button>
                         <ul class="dropdown-menu w-100 p-3 " aria-labelledby="skillsDropdown">
+                            <!-- List of skills checkboxes -->
                             <li><input type="checkbox" name="skills" value="Web Development"> Web Development</li>
                             <li><input type="checkbox" name="skills" value="Programming & Tech"> Programming & Tech</li>
                             <li><input type="checkbox" name="skills" value="App Development"> App Development</li>
@@ -131,17 +131,44 @@
 
                 <!-- Submit Button -->
                 <div class="form-group col-md-4 p-2 align-self-end">
-                    <button type="submit" class="btn btn-success w-100 ">Apply Filter(s)</button>
+                    <button type="submit" class="btn btn-success w-100">Apply Filter(s)</button>
                 </div>
             </div>
         </form>
         <hr class="section-divider" />
-        @await Html.PartialAsync("_JobsList", Model)
+        <div id="jobsListContainer">
+            @await Html.PartialAsync("_JobsList", Model)
+        </div>
     </section>
 
-</div>
+    <!-- Include the jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchJobsForm").submit(function (event) {
+                event.preventDefault(); // Prevent form submission
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                var formData = $(this).serialize(); // Serialize form data
+
+                $.ajax({
+                    url: '@Url.Action("SearchJobs", "Job")', // Your controller and action
+                    type: 'GET',
+                    data: formData,
+                    success: function (response) {
+                        // Replace the jobs list with the updated partial view
+                        $("#jobsListContainer").html(response);
+                    },
+                    error: function () {
+                        alert("Error loading jobs.");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
 <style>
     /* General Styling */
 

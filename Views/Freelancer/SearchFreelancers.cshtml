@@ -6,42 +6,48 @@
 
 <div class="search-container">
     <h1>Search Freelancers by Skill</h1>
-    <form method="get" action="/Freelancer/SearchFreelancers">
+    <form id="searchFreelancersForm" class="d-flex justify-content-center">
         <input type="text" name="searchQuery" placeholder="Enter skill name..." class="search-input" />
         <button type="submit" class="search-button">Search</button>
     </form>
 
-    @if (Model.Any())
-    {
-        <div>
-        @Html.Partial("_FreelancersList", Model)
-        </div>
-       @*  <div class="freelancer-cards">
-            @foreach (var freelancer in Model)
-            { *@
-                 @* <a href="/Freelancer/FreelancerDetails/@freelancer.FreelancerId" style="text-decoration: none;">
-               @*  <div class="freelancer-card">
-                    <div class="freelancer-card-header">
-                        <h3>@freelancer.Name</h3>
-                    </div>
-                    <div class="freelancer-card-body">
-                        <img src="@freelancer.ProfilePic" alt="@freelancer.Name" class="profile-pic" />
-                        <p><strong>Phone:</strong> @freelancer.Phone</p>
-                        <p><strong>Portfolio:</strong> <a href="@freelancer.PortfolioLink" target="_blank">@freelancer.PortfolioLink</a></p>
-                    </div> *@
-                   @*  <div class="freelancer-card-footer">
-                        <button class="contact-btn">Contact</button>
-                    </div> *@
-               @*  </div>
-                @* </a> *@
-          
-        @* </div> *@ 
-    }
-    else
-    {
-        <p class="text-muted text-center">No relevant freelancers found.</p>
-    }
+    <div id="freelancersListContainer">
+        @if (Model.Any())
+        {
+            @Html.Partial("_FreelancersList", Model)
+        }
+        else
+        {
+            <p class="text-muted text-center">No relevant freelancers found.</p>
+        }
+    </div>
 </div>
+
+<!-- Include the jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#searchFreelancersForm").submit(function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            var formData = $(this).serialize(); // Serialize form data
+
+            $.ajax({
+                url: '@Url.Action("Search", "Freelancer")', // Your controller and action
+                type: 'GET',
+                data: formData,
+                success: function (response) {
+                    // Replace the freelancers list with the updated partial view
+                    $("#freelancersListContainer").html(response);
+                },
+                error: function () {
+                    alert("Error loading freelancers.");
+                }
+            });
+        });
+    });
+</script>
+
 
 <style>
     .search-container {

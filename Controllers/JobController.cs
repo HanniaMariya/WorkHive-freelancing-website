@@ -75,7 +75,6 @@ namespace WorkHive.Controllers
         [HttpGet]
         public IActionResult SearchJobs(decimal? budget, List<string> skills)
         {
-
             var jobs = new List<Job>();
             if (skills != null && skills.Any())
             {
@@ -85,13 +84,16 @@ namespace WorkHive.Controllers
             {
                 jobs = _jobRepository.GetAllJobs();
             }
-            if (budget.HasValue && budget>0)
+
+            if (budget.HasValue && budget > 0)
             {
                 jobs = jobs.Where(job => job.budget <= budget.Value).ToList();
-
             }
-            return View(jobs);
+
+            // Return the partial view instead of the full view
+            return PartialView("_JobsList", jobs);
         }
+
         public IActionResult GetAllJobs()
         {
             var jobs = _jobRepository.GetAllJobs();

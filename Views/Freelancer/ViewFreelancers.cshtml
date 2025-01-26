@@ -10,11 +10,10 @@
         <h3 class="display-4 text-dark"@*  style="color: #0f7f59;" *@>Explore Freelancers</h3>
         <p style="color: #757575;">Find skilled freelancers tailored to your needs.</p>
     </div>
-
     <!-- Filter Section -->
     <div class="filter-section mb-5 p-3 mx-auto"
          style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 500px;">
-        <form asp-action="SearchFreelancers" method="get" class="row g-1 align-items-end">
+        <form id="searchFreelancersForm" class="row g-1 align-items-end">
             <div class="col-9">
                 <label for="skill" class="form-label" style="color: #1b5e20;">Filter by Skill:</label>
                 <input type="text" id="skill" name="searchQuery" class="form-control" placeholder="Enter a skill (e.g. SEO)" />
@@ -28,13 +27,36 @@
         </form>
     </div>
 
-
-
     <!-- Freelancers List -->
-    <div>
-        @Html.Partial("_FreelancersList", Model)
+    <div id="freelancersListContainer">
+        @await Html.PartialAsync("_FreelancersList", Model)
     </div>
-</div>
+
+    <!-- Include the jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchFreelancersForm").submit(function (event) {
+                event.preventDefault(); // Prevent form submission
+
+                var formData = $(this).serialize(); // Serialize form data
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Freelancer")', // Your controller and action
+                    type: 'GET',
+                    data: formData,
+                    success: function (response) {
+                        // Replace the freelancers list with the updated partial view
+                        $("#freelancersListContainer").html(response);
+                    },
+                    error: function () {
+                        alert("Error loading freelancers.");
+                    }
+                });
+            });
+        });
+    </script>
+
 
 <style>
     /* Style for Filter Section */

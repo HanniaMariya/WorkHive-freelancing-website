@@ -1,9 +1,13 @@
+using WorkHive.Hubs;
+using WorkHive.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -26,5 +30,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<ApplicationHub>("/appHub");
 
 app.Run();

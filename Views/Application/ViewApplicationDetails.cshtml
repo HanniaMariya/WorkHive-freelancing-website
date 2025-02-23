@@ -42,8 +42,9 @@
 
                 <!-- Actions: Hire, Reject, Back -->
                 <div class="mt-4 d-flex justify-content-between">
-                    <button class="btn btn-success bts" onclick="location.href='/application/accept?appId=@Model.app.app_id'">Hire</button>
-                    <button class="btn btn-danger bts" onclick="location.href='/application/reject?appId=@Model.app.app_id'">Reject</button>
+                    <button id="hireBtn_@Model.app.app_id" class="btn btn-success AppStatusBtn bts" data-id="@Model.app.app_id">Hire</button>
+                    <button id="rejectBtn_@Model.app.app_id" class="btn btn-danger AppStatusBtn bts" data-id="@Model.app.app_id">Reject</button>
+
                     <button class="btn btn-secondary bts" onclick="location.href='/application/viewapplicationsforjob?jobId=@Model.app.job_id'">Back to Applications</button>
                 </div>
             </div>

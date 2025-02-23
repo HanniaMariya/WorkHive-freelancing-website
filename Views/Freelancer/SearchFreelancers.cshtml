@@ -23,21 +23,20 @@
     </div>
 </div>
 
-<!-- Include the jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#searchFreelancersForm").submit(function (event) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault(); 
 
             var formData = $(this).serialize(); // Serialize form data
 
             $.ajax({
-                url: '@Url.Action("Search", "Freelancer")', // Your controller and action
+                url: '@Url.Action("Search", "Freelancer")',
                 type: 'GET',
                 data: formData,
                 success: function (response) {
-                    // Replace the freelancers list with the updated partial view
+                    
                     $("#freelancersListContainer").html(response);
                 },
                 error: function () {
